@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf91d8c95e4573b50f4cd0d83b1d43f6",
+    "content-hash": "555439c8a3352cc2868041115129cb49",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,6 +50,106 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
+        },
+        {
+            "name": "adn-magento/db-select",
+            "version": "100.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adn-magento/db-select.git",
+                "reference": "92ba9fc92f32a69e06a6ba929f5a709f8929be70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/92ba9fc92f32a69e06a6ba929f5a709f8929be70",
+                "reference": "92ba9fc92f32a69e06a6ba929f5a709f8929be70",
+                "shasum": ""
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "php": "~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Adn\\DbSelect\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien André",
+                    "email": "adn.magento@gmail.com"
+                }
+            ],
+            "description": "Adn Magento Db Select",
+            "keywords": [
+                "adn",
+                "db",
+                "magento"
+            ],
+            "support": {
+                "issues": "https://github.com/adn-magento/db-select/issues",
+                "source": "https://github.com/adn-magento/db-select/tree/100.0.0"
+            },
+            "time": "2022-03-29T11:30:15+00:00"
+        },
+        {
+            "name": "adn-magento/logger",
+            "version": "100.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adn-magento/logger.git",
+                "reference": "b4bf536cb0bf0f218dca61fc7cf6d05393a264ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adn-magento/logger/zipball/b4bf536cb0bf0f218dca61fc7cf6d05393a264ee",
+                "reference": "b4bf536cb0bf0f218dca61fc7cf6d05393a264ee",
+                "shasum": ""
+            },
+            "require": {
+                "magento/framework": "103.0.*",
+                "php": "~7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Adn\\Logger\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien André",
+                    "email": "adn.magento@gmail.com"
+                }
+            ],
+            "description": "Adn Magento Logger Stdout",
+            "keywords": [
+                "adn",
+                "log",
+                "logging",
+                "magento",
+                "psr-3"
+            ],
+            "support": {
+                "issues": "https://github.com/adn-magento/logger/issues",
+                "source": "https://github.com/adn-magento/logger/tree/100.0.0"
+            },
+            "time": "2022-03-29T08:15:41+00:00"
         },
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
@@ -25790,16 +25890,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "aa111aa1fecbc436f01e5439d88906bd3b612027"
+                "reference": "05333065c88f9518e08b094bdd10a4a9e538b2d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/aa111aa1fecbc436f01e5439d88906bd3b612027",
-                "reference": "aa111aa1fecbc436f01e5439d88906bd3b612027",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/05333065c88f9518e08b094bdd10a4a9e538b2d4",
+                "reference": "05333065c88f9518e08b094bdd10a4a9e538b2d4",
                 "shasum": ""
             },
             "require": {
@@ -25828,9 +25928,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.4.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.4.1"
             },
-            "time": "2022-03-28T10:52:48+00:00"
+            "time": "2022-03-29T09:28:16+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -27847,22 +27947,22 @@
     "platform": {
         "php": "^7.4",
         "ext-amqp": "*",
-        "ext-xdebug": "*",
-        "ext-redis": "*",
+        "ext-apcu": "*",
         "ext-curl": "*",
-        "ext-soap": "*",
+        "ext-ftp": "*",
+        "ext-gd": "*",
+        "ext-iconv": "*",
+        "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
+        "ext-redis": "*",
+        "ext-soap": "*",
+        "ext-xdebug": "*",
         "ext-xml": "*",
         "ext-xsl": "*",
-        "ext-gd": "*",
-        "ext-intl": "*",
-        "ext-iconv": "*",
-        "ext-ftp": "*",
-        "ext-zip": "*",
-        "ext-apcu": "*",
-        "ext-zend-opcache": "*"
+        "ext-zend-opcache": "*",
+        "ext-zip": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
