@@ -57,12 +57,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/adn-magento/db-select.git",
-                "reference": "f843504903b9246b000e1bd078cb6b94784eb1b1"
+                "reference": "9823e8cbf073792d7796d608150f2f8a116aaf00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/f843504903b9246b000e1bd078cb6b94784eb1b1",
-                "reference": "f843504903b9246b000e1bd078cb6b94784eb1b1",
+                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/9823e8cbf073792d7796d608150f2f8a116aaf00",
+                "reference": "9823e8cbf073792d7796d608150f2f8a116aaf00",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 "issues": "https://github.com/adn-magento/db-select/issues",
                 "source": "https://github.com/adn-magento/db-select/tree/100.0.0"
             },
-            "time": "2022-03-29T12:12:11+00:00"
+            "time": "2022-03-29T13:02:18+00:00"
         },
         {
             "name": "adn-magento/logger",
@@ -25691,16 +25691,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706"
+                "reference": "77a32518733312af16a44300404e945338981de3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/93ebd0014cab80c4ea9f5e297ea48672f1b87706",
-                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/77a32518733312af16a44300404e945338981de3",
+                "reference": "77a32518733312af16a44300404e945338981de3",
                 "shasum": ""
             },
             "require": {
@@ -25735,9 +25735,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.1"
             },
-            "time": "2022-01-04T19:58:01+00:00"
+            "time": "2022-03-15T21:29:03+00:00"
         },
         {
             "name": "phpmd/phpmd",

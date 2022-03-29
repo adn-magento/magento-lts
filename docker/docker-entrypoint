@@ -42,6 +42,16 @@ if [ "$1" = 'supervisord' ]; then
 
   done
 
+  if [ "$MAGE_MODE" = "production" ]; then
+
+    bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
+
+  else
+
+    bin-composer dump-autoload
+
+  fi
+
   if [ "$MAGE_INSTALL" == "true" ]; then
 
     until bin/magento db-select:query "select 1" >/dev/null 2>&1; do
