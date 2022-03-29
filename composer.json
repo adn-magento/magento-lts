@@ -38,7 +38,6 @@
     "ext-xsl": "*",
     "ext-zend-opcache": "*",
     "ext-zip": "*",
-    "adn-magento/db-select": "^100.0",
     "adn-magento/logger": "^100.0",
     "magento/composer-dependency-version-audit-plugin": "~0.1",
     "magento/composer-root-update-plugin": "~1.1",

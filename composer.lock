@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "555439c8a3352cc2868041115129cb49",
+    "content-hash": "2ee173376e92c6597afe2b1deb284842",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,56 +50,6 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
-        },
-        {
-            "name": "adn-magento/db-select",
-            "version": "100.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/adn-magento/db-select.git",
-                "reference": "211eb3d7fedf8b1614e72956fd1a8123b840a1a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/211eb3d7fedf8b1614e72956fd1a8123b840a1a7",
-                "reference": "211eb3d7fedf8b1614e72956fd1a8123b840a1a7",
-                "shasum": ""
-            },
-            "require": {
-                "magento/framework": "103.0.*",
-                "php": "~7.4.0"
-            },
-            "type": "magento2-module",
-            "autoload": {
-                "files": [
-                    "cli_commands.php",
-                    "registration.php"
-                ],
-                "psr-4": {
-                    "Adn\\DbSelect\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "OSL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Aurélien André",
-                    "email": "adn.magento@gmail.com"
-                }
-            ],
-            "description": "Adn Magento Db Select",
-            "keywords": [
-                "adn",
-                "db",
-                "magento"
-            ],
-            "support": {
-                "issues": "https://github.com/adn-magento/db-select/issues",
-                "source": "https://github.com/adn-magento/db-select/tree/100.0.0"
-            },
-            "time": "2022-03-29T14:17:54+00:00"
         },
         {
             "name": "adn-magento/logger",

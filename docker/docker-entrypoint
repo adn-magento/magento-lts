@@ -42,25 +42,21 @@ if [ "$1" = 'supervisord' ]; then
 
   done
 
-  if [ "$MAGE_MODE" = "production" ]; then
+  if [ "$COMPOSER_DUMP" = "true" ]; then
 
-    bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
+      if [ "$MAGE_MODE" = "production" ]; then
 
-  else
+        bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
 
-    bin-composer dump-autoload
+      else
+
+        bin-composer dump-autoload
+
+      fi
 
   fi
 
   if [ "$MAGE_INSTALL" == "true" ]; then
-
-    until bin/magento db-select:query "select 1" >/dev/null 2>&1; do
-
-      (>&2 echo "Waiting for MySQL to be ready...")
-
-      sleep 2
-
-    done
 
     bin/magento setup:upgrade
 
