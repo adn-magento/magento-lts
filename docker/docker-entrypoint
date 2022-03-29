@@ -1,0 +1,97 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" = 'supervisord' ]; then
+
+  if [ ! -s "/etc/php/7.4/90-php.ini" ]; then
+
+    for e in "${!PHP_@}"; do
+
+      VARIABLE=$(echo "$e" | sed -e 's/PHP_/''/g' | sed -e 's/__/'.'/g' | awk '{print tolower($0)}')
+
+      VALUE=$(printf '${%s}' "$e")
+
+      echo "$VARIABLE=$VALUE" >> "/etc/php/7.4/90-php.ini"
+
+    done
+
+  fi
+
+  rm -f "/var/www/html/app/etc/env.php"
+
+  if [ ! -f "/var/www/html/app/etc/env.php" ]; then
+
+    cp \
+      "/var/www/html/app/etc/env.template.php" \
+      "/var/www/html/app/etc/env.php"
+
+  fi
+
+  if [ "$COMPOSER_INSTALL" = "true" ]; then
+
+    bin-composer install --prefer-dist --no-progress --no-interaction
+
+  fi
+
+  while [ ! -f "/var/www/html/vendor/autoload.php" ]; do
+
+    (echo >&2 "Waiting for Composer to be ready...")
+
+    sleep 2
+
+  done
+
+  if [ "$MAGE_INSTALL" == "true" ]; then
+
+    until bin/magento db-select:query "select 1" >/dev/null 2>&1; do
+
+      (>&2 echo "Waiting for MySQL to be ready...")
+
+      sleep 2
+
+    done
+
+    bin/magento setup:upgrade
+
+  fi
+
+  if [ "$MAGE_COMPILE" == "true" ]; then
+
+    bin/magento setup:di:compile
+
+  fi
+
+  if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
+
+    bin/magento cache:clean
+
+  fi
+
+fi
+
+if [ "$1" = 'supervisorctl' ]; then
+
+  while [ ! -f "/var/pid/supervisord.pid" ]; do
+
+    (echo >&2 "Waiting for Supervisor to be ready...")
+
+    sleep 2
+
+  done
+
+fi
+
+if [ "$1" = 'nginx' ]; then
+
+  while [ ! -f "/var/pid/php7.4-fpm.pid" ]; do
+
+    (echo >&2 "Waiting for Fpm to be ready...")
+
+    sleep 2
+
+  done
+
+fi
+
+exec "$@"

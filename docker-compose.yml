@@ -1,0 +1,137 @@
+version: '3.8'
+
+services:
+
+  traefik:
+    image: traefik:latest
+    command: --api.insecure=true --providers.docker
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`www.traefik.lan`)
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "80:80"
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mailhog.rule=Host(`www.mailhog.lan`)
+      - traefik.http.services.mailhog.loadbalancer.server.port=8025
+    depends_on:
+      - traefik
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    labels:
+      - traefik.enable=false
+    depends_on:
+      - traefik
+    volumes:
+      - ./data/mysql:/var/lib/mysql:rw,delegated
+      - ./data/mysql-initdb/:/docker-entrypoint-initdb.d:rw,delegated
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: ${MYSQL_HOST}
+      PMA_PORT: ${MYSQL_PORT}
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.phpmyadmin.rule=Host(`www.phpmyadmin.lan`)
+    links:
+      - mysql
+    depends_on:
+      - traefik
+      - mysql
+
+  redis-cache:
+    image: redis:latest
+    labels:
+      - traefik.enable=false
+    depends_on:
+      - traefik
+    volumes:
+      - ./data/redis-cache:/data:rw,delegated
+
+  redis-session:
+    image: redis:latest
+    labels:
+      - traefik.enable=false
+    depends_on:
+      - traefik
+    volumes:
+      - ./data/redis-session:/data:rw,delegated
+
+  elasticsearch:
+    image: elasticsearch:7.16.3
+    environment:
+      - discovery.type=single-node
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.elasticsearch.rule=Host(`www.elasticsearch.lan`)
+      - traefik.http.services.elasticsearch.loadbalancer.server.port=9200
+    depends_on:
+      - traefik
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data:rw,delegated
+
+  rabbitmq:
+    image: rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.rabbitmq.rule=Host(`www.rabbitmq.lan`)
+      - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
+    depends_on:
+      - traefik
+
+  node:
+    image: node:lts-bullseye
+    command: npm install
+    working_dir: /var/www/html
+    labels:
+      - traefik.enable=false
+    depends_on:
+      - traefik
+    volumes:
+      - ./:/var/www/html:rw,delegated
+
+  magento:
+    image: aurelienandre/magento-lts:latest
+    env_file:
+      - .env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.magento.rule=Host(`www.magento.lan`)
+      - traefik.http.services.magento.loadbalancer.server.port=80
+    links:
+      - mysql
+      - redis-cache
+      - redis-session
+      - elasticsearch
+      - rabbitmq
+      - mailhog
+    depends_on:
+      - traefik
+      - mysql
+      - redis-cache
+      - redis-session
+      - elasticsearch
+      - rabbitmq
+      - mailhog
+    volumes:
+      - ./:/var/www/html:rw,delegated
+      - ./data/media:/var/www/html/pub/media:rw,delegated
