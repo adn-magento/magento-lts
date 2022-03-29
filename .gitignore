@@ -4,6 +4,7 @@
 !/data/mysql/.gitignore
 /data/mysql-initdb/*
 !/data/mysql-initdb/.gitignore
+!/data/mysql-initdb/setup.sql
 /data/redis-cache/*
 !/data/redis-cache/.gitignore
 /data/redis-session/*
