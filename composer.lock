@@ -57,12 +57,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/adn-magento/db-select.git",
-                "reference": "9823e8cbf073792d7796d608150f2f8a116aaf00"
+                "reference": "211eb3d7fedf8b1614e72956fd1a8123b840a1a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/9823e8cbf073792d7796d608150f2f8a116aaf00",
-                "reference": "9823e8cbf073792d7796d608150f2f8a116aaf00",
+                "url": "https://api.github.com/repos/adn-magento/db-select/zipball/211eb3d7fedf8b1614e72956fd1a8123b840a1a7",
+                "reference": "211eb3d7fedf8b1614e72956fd1a8123b840a1a7",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 "issues": "https://github.com/adn-magento/db-select/issues",
                 "source": "https://github.com/adn-magento/db-select/tree/100.0.0"
             },
-            "time": "2022-03-29T13:02:18+00:00"
+            "time": "2022-03-29T14:17:54+00:00"
         },
         {
             "name": "adn-magento/logger",
