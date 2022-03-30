@@ -110,7 +110,7 @@ rm -rf generated/* \
 
 ### Environment
 
-@see [.env](/.env)
+Configure your environment via [.env](/.env) files
 
 ### PHP
 
