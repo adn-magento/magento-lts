@@ -237,3 +237,11 @@ Phpunit
 ```shell
 docker-compose exec magento bin-composer exec phpunit
 ```
+
+## Extra Packages
+
+Docker logger stdout
+
+```shell
+docker-compose exec magento bin-composer require adn-magento/logger
+```
