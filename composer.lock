@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ee173376e92c6597afe2b1deb284842",
+    "content-hash": "13554977047614f1060edffe389b3c93",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,57 +50,6 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
-        },
-        {
-            "name": "adn-magento/logger",
-            "version": "100.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/adn-magento/logger.git",
-                "reference": "b4bf536cb0bf0f218dca61fc7cf6d05393a264ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/adn-magento/logger/zipball/b4bf536cb0bf0f218dca61fc7cf6d05393a264ee",
-                "reference": "b4bf536cb0bf0f218dca61fc7cf6d05393a264ee",
-                "shasum": ""
-            },
-            "require": {
-                "magento/framework": "103.0.*",
-                "php": "~7.4.0"
-            },
-            "type": "magento2-module",
-            "autoload": {
-                "files": [
-                    "registration.php"
-                ],
-                "psr-4": {
-                    "Adn\\Logger\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "OSL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Aurélien André",
-                    "email": "adn.magento@gmail.com"
-                }
-            ],
-            "description": "Adn Magento Logger Stdout",
-            "keywords": [
-                "adn",
-                "log",
-                "logging",
-                "magento",
-                "psr-3"
-            ],
-            "support": {
-                "issues": "https://github.com/adn-magento/logger/issues",
-                "source": "https://github.com/adn-magento/logger/tree/100.0.0"
-            },
-            "time": "2022-03-29T08:15:41+00:00"
         },
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
@@ -385,16 +334,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.216.3",
+            "version": "3.216.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5ec2b55c7e2afdaf173348841440076c8e2d2acb"
+                "reference": "fd16bb2ecc4e1a47b145163d0bd7744c4578656d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5ec2b55c7e2afdaf173348841440076c8e2d2acb",
-                "reference": "5ec2b55c7e2afdaf173348841440076c8e2d2acb",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fd16bb2ecc4e1a47b145163d0bd7744c4578656d",
+                "reference": "fd16bb2ecc4e1a47b145163d0bd7744c4578656d",
                 "shasum": ""
             },
             "require": {
@@ -470,9 +419,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.216.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.216.4"
             },
-            "time": "2022-03-28T18:16:18+00:00"
+            "time": "2022-03-29T18:29:23+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -3140,31 +3089,31 @@
         },
         {
             "name": "laminas/laminas-db",
-            "version": "2.13.4",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-db.git",
-                "reference": "cdabb4bfa669c2c0edb0cb4e014c15b41afd3fb1"
+                "reference": "f0c039e3d99cd0ebf053077b436caa4d7791728a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/cdabb4bfa669c2c0edb0cb4e014c15b41afd3fb1",
-                "reference": "cdabb4bfa669c2c0edb0cb4e014c15b41afd3fb1",
+                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/f0c039e3d99cd0ebf053077b436caa4d7791728a",
+                "reference": "f0c039e3d99cd0ebf053077b436caa4d7791728a",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-stdlib": "^3.6",
-                "php": "^7.3 || ~8.0.0 || ~8.1.0"
+                "laminas/laminas-stdlib": "^3.7.1",
+                "php": "^7.4 || ~8.0.0 || ~8.1.0"
             },
             "conflict": {
                 "zendframework/zend-db": "*"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~2.2.1",
-                "laminas/laminas-eventmanager": "^3.4",
+                "laminas/laminas-coding-standard": "^2.3.0",
+                "laminas/laminas-eventmanager": "^3.4.0",
                 "laminas/laminas-hydrator": "^3.2 || ^4.3",
-                "laminas/laminas-servicemanager": "^3.7",
-                "phpunit/phpunit": "^9.5.5"
+                "laminas/laminas-servicemanager": "^3.10.0",
+                "phpunit/phpunit": "^9.5.19"
             },
             "suggest": {
                 "laminas/laminas-eventmanager": "Laminas\\EventManager component",
@@ -3207,7 +3156,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-21T18:59:44+00:00"
+            "time": "2022-03-29T20:14:33+00:00"
         },
         {
             "name": "laminas/laminas-dependency-plugin",
