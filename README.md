@@ -106,6 +106,17 @@ rm -rf generated/* \
 && docker-compose exec magento bin/magento cache:flush
 ```
 
+Create your admin user
+
+```shell
+docker-compose exec magento bin/magento admin:user:create \
+--admin-firstname="$(whoami)" \
+--admin-lastname="$(whoami)" \
+--admin-email="$(whoami)@magento.lan" \
+--admin-user="$(whoami)" \
+--admin-password="$(whoami)123"
+```
+
 ## Configuration
 
 ### Environment
