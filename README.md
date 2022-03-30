@@ -108,6 +108,10 @@ rm -rf generated/* \
 
 ## Configuration
 
+### Environment
+
+@see [.env](/.env)
+
 ### PHP
 
 To configure php, use the environment variable.
