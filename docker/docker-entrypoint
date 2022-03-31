@@ -28,23 +28,21 @@ if [ "$1" = 'supervisord' ]; then
 
   fi
 
-  if [ "$COMPOSER_INSTALL" = "true" ]; then
+  if [ "$COMPOSER_INSTALL" == "true" ]; then
+
+    if [ "$COMPOSER_AUTH" != "" ]; then
+
+      echo "$COMPOSER_AUTH" > "/var/www/html/auth.json"
+
+    fi
 
     bin-composer install --prefer-dist --no-progress --no-interaction
 
   fi
 
-  while [ ! -f "/var/www/html/vendor/autoload.php" ]; do
+  if [ "$COMPOSER_DUMP" == "true" ]; then
 
-    (echo >&2 "Waiting for Composer to be ready...")
-
-    sleep 2
-
-  done
-
-  if [ "$COMPOSER_DUMP" = "true" ]; then
-
-      if [ "$MAGE_MODE" = "production" ]; then
+      if [ "$MAGE_MODE" == "production" ]; then
 
         bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
 
@@ -55,6 +53,14 @@ if [ "$1" = 'supervisord' ]; then
       fi
 
   fi
+
+  while [ ! -f "/var/www/html/vendor/autoload.php" ]; do
+
+    (echo >&2 "Waiting for Composer to be ready...")
+
+    sleep 2
+
+  done
 
   if [ "$MAGE_INSTALL" == "true" ]; then
 
@@ -71,6 +77,28 @@ if [ "$1" = 'supervisord' ]; then
   if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
 
     bin/magento cache:clean
+
+  fi
+
+  if [ "$USE_SERVER" != "true" ]; then
+
+    rm -f /etc/supervisor/conf.d/server.conf
+
+  fi
+
+  if [ "$USE_CRONTAB" != "true" ]; then
+
+    rm -f /etc/supervisor/conf.d/crontab.conf
+
+  fi
+
+  if [ "$MAGE_MODE" == "production" ]; then
+
+      rm -f \
+      "/usr/bin/bin-composer" \
+      "/usr/bin/bin-mhsendmail" \
+      "/usr/bin/bin-mkcert" \
+      "/usr/bin/bin-phing"
 
   fi
 

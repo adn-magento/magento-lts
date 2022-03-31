@@ -2,24 +2,39 @@ FROM debian:bullseye-slim
 
 ARG UID=1000
 ARG GID=1000
+ARG GIT_COMMIT=""
+ARG USE_SERVER="false"
+ARG USE_CRONTAB="false"
+ARG COMPOSER_AUTH=""
+ARG COMPOSER_INSTALL="false"
+ARG COMPOSER_DUMP="false"
+ARG MAGE_INSTALL="false"
+ARG MAGE_COMPILE="false"
+ARG MAGE_CLEAN_CACHE="false"
+ARG MAGE_DEBUG="0"
+ARG MAGE_MODE="production"
+ARG MAGE_RUN_CODE="base"
+ARG MAGE_RUN_TYPE="website"
 
 ENV \
-COMPOSER_INSTALL="false" \
-COMPOSER_DUMP="true" \
+GIT_COMMIT=${GIT_COMMIT} \
+USE_SERVER=${USE_SERVER} \
+USE_CRONTAB=${USE_CRONTAB} \
+COMPOSER_AUTH=${COMPOSER_AUTH} \
+COMPOSER_INSTALL=${COMPOSER_INSTALL} \
+COMPOSER_DUMP=${COMPOSER_DUMP} \
 COMPOSER_ALLOW_SUPERUSER='0' \
 COMPOSER_ALLOW_XDEBUG='0' \
 COMPOSER_CACHE_DIR='/var/cache/composer' \
-USE_SERVER="true" \
-USE_CRONTAB="true" \
+MAGE_INSTALL=${MAGE_INSTALL} \
+MAGE_COMPILE=${MAGE_COMPILE} \
+MAGE_CLEAN_CACHE=${MAGE_CLEAN_CACHE} \
+MAGE_DEBUG=${MAGE_DEBUG} \
+MAGE_MODE=${MAGE_MODE} \
+MAGE_RUN_CODE=${MAGE_RUN_CODE} \
+MAGE_RUN_TYPE=${MAGE_RUN_TYPE} \
 CRONTAB_DEFAULT_SLEEP="60" \
 CRONTAB_INDEX_SLEEP="60" \
-MAGE_INSTALL="false" \
-MAGE_COMPILE="false" \
-MAGE_CLEAN_CACHE="false" \
-MAGE_DEBUG="1" \
-MAGE_MODE="developer" \
-MAGE_RUN_CODE="base" \
-MAGE_RUN_TYPE="website" \
 MYSQL_HOST="mysql" \
 MYSQL_PORT="3306" \
 MYSQL_DATABASE="magento" \
@@ -133,6 +148,8 @@ rm -rf /etc/nginx/sites-enabled/*
 
 COPY --chown=rootless:rootless server .
 
+COPY --chown=rootless:rootless supervisor/ /etc/supervisor/conf.d/
+
 RUN set -eux; \
 ln -sf \
 /etc/php/7.4/90-php.ini \
@@ -199,7 +216,8 @@ COPY --chown=rootless:rootless . /var/www/html
 
 RUN rm -rf \
 /var/www/html/docker \
-/var/www/html/server
+/var/www/html/server \
+/var/www/html/supervisor
 
 COPY --chown=rootless:rootless docker/ /usr/bin
 

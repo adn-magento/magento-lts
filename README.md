@@ -41,7 +41,7 @@ Copy rules
 Update composer auth.json
 
 ```shell
-cp auth.sample.json auth.json # Change the entries into src/auth.json
+cp auth.sample.json auth.json # Change the entries into auth.json
 ```
 
 Install composer
@@ -84,8 +84,8 @@ Build image
 
 ```shell
 docker build . -t aurelienandre/magento-lts:latest \
---build-arg UID=$(id -u) \
---build-arg GID=$(id -g)
+--build-arg UID="$(id -u)" \
+--build-arg GID="$(id -g)" \
 ```
 
 Start containers

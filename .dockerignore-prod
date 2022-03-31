@@ -12,10 +12,8 @@
 /dev
 /generated
 /node_modules
-/pub/static
 /setup
 /var
-/vendor
 /.gitignore
 /.editorconfig
 /Gruntfile.js
