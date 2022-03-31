@@ -85,7 +85,7 @@ Build image
 ```shell
 docker build . -t aurelienandre/magento-lts:latest \
 --build-arg UID="$(id -u)" \
---build-arg GID="$(id -g)" \
+--build-arg GID="$(id -g)"
 ```
 
 Start containers
