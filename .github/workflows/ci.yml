@@ -29,22 +29,26 @@ jobs:
       - name: Composer Install
         run: |
           docker run --rm -i \
+            -e COMPOSER_AUTH=${{ secrets.DOCKERHUB_USERNAME }} \
             ${{ env.TEST_TAG }} \
             bin-composer install --prefer-dist --no-progress --no-interaction
       - name: PHPUnit
         run: |
           docker run --rm -i \
+            -e COMPOSER_AUTH=${{ secrets.DOCKERHUB_USERNAME }} \
             ${{ env.TEST_TAG }} \
             bin-composer exec phpunit
       - name: Static Content deploy
         run: |
           docker run --rm -i \
+            -e COMPOSER_AUTH=${{ secrets.DOCKERHUB_USERNAME }} \
             ${{ env.TEST_TAG }} \
             bin/magento setup:static-content:deploy fr_FR; \
             bin/magento setup:static-content:deploy en_US
       - name: Composer Dump Autoload
         run: |
           docker run --rm -i \
+            -e COMPOSER_AUTH=${{ secrets.DOCKERHUB_USERNAME }} \
             ${{ env.TEST_TAG }} \
             bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
       - name: Create docker irgnore for prod
