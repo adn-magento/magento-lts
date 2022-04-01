@@ -6,6 +6,8 @@ on:
 
 env:
   TEST_TAG: aurelienandre/magento-lts:test
+  UID: $(id -u)
+  GID: $(id -g)
 
 jobs:
   docker-deployment:
@@ -24,8 +26,8 @@ jobs:
         with:
           context: .
           build-args: |
-            UID=$(id -u)
-            GID=$(id -g)
+            UID=${{ env.UID }}
+            GID==${{ env.GID }}
           load: true
           push: false
           tags: ${{ env.TEST_TAG }}
