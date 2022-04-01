@@ -24,8 +24,8 @@ jobs:
         with:
           context: .
           build-args: |
-            UID="$(id -u)"
-            GID="$(id -g)"
+            UID=$(id -u)
+            GID=$(id -g)
           load: true
           push: false
           tags: ${{ env.TEST_TAG }}
