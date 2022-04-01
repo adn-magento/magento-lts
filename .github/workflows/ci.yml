@@ -8,7 +8,7 @@ env:
   TEST_TAG: aurelienandre/magento-lts:test
 
 jobs:
-  docker:
+  docker-deployment:
     runs-on: ubuntu-latest
     environment: production
     steps:
