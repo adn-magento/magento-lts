@@ -15,7 +15,8 @@
             "magento/composer-dependency-version-audit-plugin": true,
             "magento/composer-root-update-plugin": true,
             "magento/inventory-composer-installer": true,
-            "magento/magento-composer-installer": true
+            "magento/magento-composer-installer": true,
+            "cweagans/composer-patches": true
         }
     },
     "version": "2.4.3-p1",
@@ -38,6 +39,7 @@
         "ext-xsl": "*",
         "ext-zend-opcache": "*",
         "ext-zip": "*",
+        "cweagans/composer-patches": "^1.7",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/product-community-edition": "2.4.3-p1"
@@ -102,10 +104,14 @@
     },
     "extra": {
         "patches": {
-            "magento/module-email": {
-                "CVE-2022-24086, MDVA-43395_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43395_EE_2.4.3-p1_COMPOSER_v1.patch",
-                "CVE-2022-24086, MDVA-43443_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43443_EE_2.4.3-p1_COMPOSER_v1.patch"
-            }
+            "magento/framework": [
+                "patch/magento/framework/MDVA-43395.patch",
+                "patch/magento/framework/MDVA-43443.patch"
+            ],
+            "magento/module-email": [
+                "patch/magento/module-email/MDVA-43395.patch",
+                "patch/magento/module-email/MDVA-43443.patch"
+            ]
         }
     }
 }
