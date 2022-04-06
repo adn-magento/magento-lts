@@ -98,14 +98,14 @@ Initialize magento
 
 ```shell
 rm -rf generated/* \
+&& rm -rf pub/static/* \
+&& rm -rf var/view_preprocessed/* \
 && docker-compose exec magento bin/magento app:config:import \
 && docker-compose exec magento bin/magento setup:upgrade \
 && docker-compose exec magento bin/magento setup:di:compile \
 && docker-compose exec magento bin/magento indexer:reindex \
 && docker-compose exec magento bin/magento cache:clean \
 && docker-compose exec magento bin/magento cache:flush \
-&& rm -rf pub/static/* \
-&& rm -rf var/view_preprocessed/* \
 && docker-compose exec magento bin/magento setup:static-content:deploy en_US -f
 ```
 
