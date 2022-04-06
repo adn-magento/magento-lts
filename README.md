@@ -139,10 +139,16 @@ Install Authenticator (Magento_TwoFactorAuth)
 find patch/magento/* -name "*.patch" -print
 ```
 
-| Bulletin ID | Source                                                              |
-|-------------|---------------------------------------------------------------------|
-| APSB22-12   | patch/magento/module-email/MDVA-43395_EE_2.4.3-p1_COMPOSER_v1.patch |
-| APSB22-12   | patch/magento/module-email/MDVA-43443_EE_2.4.3-p1_COMPOSER_v1.patch |
+https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-
+
+[APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)
+
+| Bulletin ID | Source                                      |
+|-------------|---------------------------------------------|
+| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/framework/MDVA-43443.patch    |
+| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/framework/MDVA-43395.patch    |
+| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/module-email/MDVA-43443.patch |
+| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/module-email/MDVA-43395.patch |
 
 ## Configuration
 
