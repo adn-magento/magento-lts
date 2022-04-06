@@ -138,11 +138,6 @@ Install Authenticator (Magento_TwoFactorAuth)
 ```shell
 find patch/magento/* -name "*.patch" -print
 ```
-
-https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-
-
-[APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)
-
 | Bulletin ID | Source                                      |
 |-------------|---------------------------------------------|
 | [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/framework/MDVA-43443.patch    |
