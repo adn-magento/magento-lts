@@ -120,7 +120,7 @@ docker-compose exec magento bin/magento admin:user:create \
 --admin-password="$(whoami)123"
 ```
 
-Or user admin user
+Or default admin user
 
 ```text
 login : admin
