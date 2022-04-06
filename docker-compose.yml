@@ -110,7 +110,7 @@ services:
       - ./:/var/www/html:rw,delegated
 
   magento:
-    image: aurelienandre/magento-lts:latest
+    image: magento-lts:latest
     env_file:
       - .env
     labels:

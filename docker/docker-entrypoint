@@ -22,15 +22,13 @@ if [ "$1" = 'supervisord' ]; then
 
   if [ ! -f "/var/www/html/app/etc/env.php" ]; then
 
-    cp \
-      "/var/www/html/app/etc/env.template.php" \
-      "/var/www/html/app/etc/env.php"
+    cp "/var/www/html/app/etc/env.template.php" "/var/www/html/app/etc/env.php"
 
   fi
 
   if [ "$COMPOSER_INSTALL" == "true" ]; then
 
-    if [ "$COMPOSER_AUTH" != "" ]; then
+    if [ "$COMPOSER_AUTH" != "" ] && [ ! -f "/var/www/html/auth.json" ]; then
 
       echo "$COMPOSER_AUTH" > "/var/www/html/auth.json"
 

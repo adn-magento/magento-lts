@@ -3,36 +3,24 @@ FROM debian:bullseye-slim
 ARG UID=1000
 ARG GID=1000
 ARG GIT_COMMIT=""
-ARG USE_SERVER="false"
-ARG USE_CRONTAB="false"
-ARG COMPOSER_AUTH=""
-ARG COMPOSER_INSTALL="false"
-ARG COMPOSER_DUMP="false"
-ARG MAGE_INSTALL="false"
-ARG MAGE_COMPILE="false"
-ARG MAGE_CLEAN_CACHE="false"
-ARG MAGE_DEBUG="0"
-ARG MAGE_MODE="production"
-ARG MAGE_RUN_CODE="base"
-ARG MAGE_RUN_TYPE="website"
 
 ENV \
 GIT_COMMIT=${GIT_COMMIT} \
-USE_SERVER=${USE_SERVER} \
-USE_CRONTAB=${USE_CRONTAB} \
-COMPOSER_AUTH=${COMPOSER_AUTH} \
-COMPOSER_INSTALL=${COMPOSER_INSTALL} \
-COMPOSER_DUMP=${COMPOSER_DUMP} \
+USE_SERVER="false" \
+USE_CRONTAB="false" \
+COMPOSER_AUTH="" \
+COMPOSER_INSTALL="false" \
+COMPOSER_DUMP="false" \
 COMPOSER_ALLOW_SUPERUSER='0' \
 COMPOSER_ALLOW_XDEBUG='0' \
 COMPOSER_CACHE_DIR='/var/cache/composer' \
-MAGE_INSTALL=${MAGE_INSTALL} \
-MAGE_COMPILE=${MAGE_COMPILE} \
-MAGE_CLEAN_CACHE=${MAGE_CLEAN_CACHE} \
-MAGE_DEBUG=${MAGE_DEBUG} \
-MAGE_MODE=${MAGE_MODE} \
-MAGE_RUN_CODE=${MAGE_RUN_CODE} \
-MAGE_RUN_TYPE=${MAGE_RUN_TYPE} \
+MAGE_INSTALL="false" \
+MAGE_COMPILE="false" \
+MAGE_CLEAN_CACHE="false" \
+MAGE_DEBUG="0" \
+MAGE_MODE="production" \
+MAGE_RUN_CODE="base" \
+MAGE_RUN_TYPE="website" \
 CRONTAB_DEFAULT_SLEEP="60" \
 CRONTAB_INDEX_SLEEP="60" \
 MYSQL_HOST="mysql" \
@@ -90,8 +78,9 @@ PHP_OPCACHE__PRELOAD="/var/www/html/app/preload.php" \
 PHP_OPCACHE__PRELOAD_USER="rootless" \
 PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache"
 
-RUN apt-get update \
-&&  apt-get install -y --no-install-recommends \
+RUN RUN set -eux; \
+apt-get update \
+&& apt-get install -y --no-install-recommends \
 software-properties-common \
 apt-transport-https \
 lsb-release \
@@ -111,12 +100,14 @@ echo "rootless:${UID}:${GID}" >> /etc/subgid; \
 echo "rootless:rootless:${UID}:${GID}:/root:/bin" >> /etc/passwd; \
 echo "rootless::${GID}:rootless" >> /etc/group
 
-RUN apt-get update \
-&&  wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
-&&  echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
+RUN RUN set -eux; \
+apt-get update \
+&& wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
+&& echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
 
-RUN apt-get update \
-&&  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+RUN RUN set -eux; \
+apt-get update \
+&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 supervisor \
 nginx \
 php7.4 \
@@ -214,7 +205,8 @@ rm -f /var/www/html/*;
 
 COPY --chown=rootless:rootless . /var/www/html
 
-RUN rm -rf \
+RUN RUN set -eux; \
+rm -rf \
 /var/www/html/docker \
 /var/www/html/server \
 /var/www/html/supervisor
@@ -226,6 +218,7 @@ chmod 777 -R /usr/bin; \
 chmod +x -R /usr/bin; \
 chmod 777 -R /usr/sbin; \
 chmod +x -R /usr/sbin; \
+chmod 777 -R /var/www/html/bin; \
 chmod +x -R /var/www/html/bin
 
 WORKDIR /var/www/html

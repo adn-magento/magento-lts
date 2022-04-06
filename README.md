@@ -83,7 +83,7 @@ mv mkcert-v1.4.3-linux-amd64 docker/bin-mkcert
 Build image
 
 ```shell
-docker build . -t aurelienandre/magento-lts:latest \
+docker build . -t magento-lts:latest \
 --build-arg UID="$(id -u)" \
 --build-arg GID="$(id -g)"
 ```
@@ -119,6 +119,30 @@ docker-compose exec magento bin/magento admin:user:create \
 --admin-user="$(whoami)" \
 --admin-password="$(whoami)123"
 ```
+
+Or user admin user
+
+```text
+login : admin
+password : admin123
+```
+
+Install Authenticator (Magento_TwoFactorAuth)
+
+[Chrome](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai?hl=en)
+
+[Firefox](https://addons.mozilla.org/fr/firefox/addon/auth-helper/)
+
+## Patches
+
+```shell
+find patch/magento/* -name "*.patch" -print
+```
+
+| Bulletin ID | Source                                                              |
+|-------------|---------------------------------------------------------------------|
+| APSB22-12   | patch/magento/module-email/MDVA-43395_EE_2.4.3-p1_COMPOSER_v1.patch |
+| APSB22-12   | patch/magento/module-email/MDVA-43443_EE_2.4.3-p1_COMPOSER_v1.patch |
 
 ## Configuration
 
@@ -254,8 +278,18 @@ docker-compose exec magento bin-composer exec phpunit
 
 ## Extra Packages
 
-Docker logger stdout
+### Logger
+
+https://github.com/adn-magento/logger
 
 ```shell
 docker-compose exec magento bin-composer require adn-magento/logger
+```
+
+### Etl
+
+https://github.com/adn-magento/etl
+
+```shell
+docker-compose exec magento bin-composer require adn-magento/etl
 ```
