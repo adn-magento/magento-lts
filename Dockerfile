@@ -209,8 +209,7 @@ COPY --chown=rootless:rootless . /var/www/html
 RUN set -eux; \
 rm -rf \
 /var/www/html/docker \
-/var/www/html/server \
-/var/www/html/supervisor
+/var/www/html/server
 
 COPY --chown=rootless:rootless docker/ /usr/bin
 

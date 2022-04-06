@@ -148,7 +148,9 @@ find patch/magento/* -name "*.patch" -print
 
 ### Environment
 
-Configure your environment via [.env](/.env) files
+Configure your environment via [.env](/.env) files for local
+
+Magento best practices 
 
 @see https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-var-name.html
 
@@ -268,7 +270,7 @@ supervisorctl stop crontab:*
 # crontab:crontab-default_00: stopped
 ```
 
-@see [supervisor/crontab.conf](/supervisor/crontab.conf) and [supervisor/server.conf](/supervisor/server.conf)
+@see [supervisor/crontab.conf](/supervisor/crontab.conf) [supervisor/server.conf](/supervisor/server.conf)
 
 ## Test 
 
