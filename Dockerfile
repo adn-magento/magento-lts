@@ -78,7 +78,7 @@ PHP_OPCACHE__PRELOAD="/var/www/html/app/preload.php" \
 PHP_OPCACHE__PRELOAD_USER="rootless" \
 PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache"
 
-RUN RUN set -eux; \
+RUN set -eux; \
 apt-get update \
 && apt-get install -y --no-install-recommends \
 software-properties-common \
@@ -90,6 +90,7 @@ gnupg1 \
 gnupg2 \
 wget \
 git \
+patch \
 curl \
 unzip
 
@@ -100,12 +101,12 @@ echo "rootless:${UID}:${GID}" >> /etc/subgid; \
 echo "rootless:rootless:${UID}:${GID}:/root:/bin" >> /etc/passwd; \
 echo "rootless::${GID}:rootless" >> /etc/group
 
-RUN RUN set -eux; \
+RUN set -eux; \
 apt-get update \
 && wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
 && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
 
-RUN RUN set -eux; \
+RUN set -eux; \
 apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 supervisor \
@@ -205,7 +206,7 @@ rm -f /var/www/html/*;
 
 COPY --chown=rootless:rootless . /var/www/html
 
-RUN RUN set -eux; \
+RUN set -eux; \
 rm -rf \
 /var/www/html/docker \
 /var/www/html/server \

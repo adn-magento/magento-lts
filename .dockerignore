@@ -12,6 +12,7 @@
 /dev
 /generated
 /node_modules
+/patch
 /pub/static
 /setup
 /var

@@ -94,17 +94,17 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "repositories": [
-        {
+    "repositories": {
+        "magento_mirror": {
             "type": "composer",
             "url": "https://repo.magento.com/"
         }
-    ],
+    },
     "extra": {
         "patches": {
-            "module-email": {
-                "Adobe security patch CVE-2022-24086 MDVA-43395_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43395_EE_2.4.3-p1_COMPOSER_v1.patch",
-                "Adobe security patch CVE-2022-24086 MDVA-43443_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43443_EE_2.4.3-p1_COMPOSER_v1.patch"
+            "magento/module-email": {
+                "CVE-2022-24086, MDVA-43395_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43395_EE_2.4.3-p1_COMPOSER_v1.patch",
+                "CVE-2022-24086, MDVA-43443_EE_2.4.3-p1_COMPOSER_v1": "patch/magento/module-email/MDVA-43443_EE_2.4.3-p1_COMPOSER_v1.patch"
             }
         }
     }
