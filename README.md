@@ -150,6 +150,8 @@ find patch/magento/* -name "*.patch" -print
 
 Configure your environment via [.env](/.env) files
 
+@see https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-var-name.html
+
 ### PHP
 
 To configure php, use the environment variable.
