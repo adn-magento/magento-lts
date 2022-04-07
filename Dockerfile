@@ -3,17 +3,18 @@ FROM debian:bullseye-slim
 ARG UID=1000
 ARG GID=1000
 ARG GIT_COMMIT=""
+ARG COMPOSER_AUTH=""
 
 ENV \
 GIT_COMMIT=${GIT_COMMIT} \
-USE_SERVER="false" \
-USE_CRONTAB="false" \
-COMPOSER_AUTH="" \
+COMPOSER_AUTH=${COMPOSER_AUTH} \
 COMPOSER_INSTALL="false" \
 COMPOSER_DUMP="false" \
 COMPOSER_ALLOW_SUPERUSER='0' \
 COMPOSER_ALLOW_XDEBUG='0' \
 COMPOSER_CACHE_DIR='/var/cache/composer' \
+USE_SERVER="false" \
+USE_CRONTAB="false" \
 MAGE_INSTALL="false" \
 MAGE_COMPILE="false" \
 MAGE_CLEAN_CACHE="false" \
@@ -209,7 +210,8 @@ COPY --chown=rootless:rootless . /var/www/html
 RUN set -eux; \
 rm -rf \
 /var/www/html/docker \
-/var/www/html/server
+/var/www/html/server \
+/var/www/html/supervisor
 
 COPY --chown=rootless:rootless docker/ /usr/bin
 
