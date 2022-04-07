@@ -36,7 +36,8 @@ services:
     depends_on:
       - traefik
     volumes:
-      - ./data/mysql:/var/lib/mysql:rw,delegated
+      - mysql_data:/var/lib/mysql:rw,delegated
+#      - ./data/mysql:/var/lib/mysql:rw,delegated
       - ./data/mysql-initdb/:/docker-entrypoint-initdb.d:rw,delegated
 
   phpmyadmin:
@@ -62,7 +63,8 @@ services:
     depends_on:
       - traefik
     volumes:
-      - ./data/redis-cache:/data:rw,delegated
+      - redis_cache_data:/data:rw,delegated
+#      - ./data/redis-cache:/data:rw,delegated
 
   redis-session:
     image: redis:latest
@@ -71,7 +73,8 @@ services:
     depends_on:
       - traefik
     volumes:
-      - ./data/redis-session:/data:rw,delegated
+      - redis_session_data:/data:rw,delegated
+#      - ./data/redis-session:/data:rw,delegated
 
   elasticsearch:
     image: elasticsearch:7.16.3
@@ -84,7 +87,8 @@ services:
     depends_on:
       - traefik
     volumes:
-      - ./data/elasticsearch:/usr/share/elasticsearch/data:rw,delegated
+      - elasticsearch_data:/usr/share/elasticsearch/data:rw,delegated
+#      - ./data/elasticsearch:/usr/share/elasticsearch/data:rw,delegated
 
   rabbitmq:
     image: rabbitmq:management
@@ -135,3 +139,9 @@ services:
     volumes:
       - ./:/var/www/html:rw,delegated
       - ./data/media:/var/www/html/pub/media:rw,delegated
+
+volumes:
+  mysql_data:
+  redis_cache_data:
+  redis_session_data:
+  elasticsearch_data:
