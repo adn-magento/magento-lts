@@ -101,17 +101,5 @@
             "type": "composer",
             "url": "https://repo.magento.com/"
         }
-    },
-    "extra": {
-        "patches": {
-            "magento/framework": [
-                "patch/magento/framework/MDVA-43395.patch",
-                "patch/magento/framework/MDVA-43443.patch"
-            ],
-            "magento/module-email": [
-                "patch/magento/module-email/MDVA-43395.patch",
-                "patch/magento/module-email/MDVA-43443.patch"
-            ]
-        }
     }
 }

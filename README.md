@@ -133,18 +133,6 @@ Install Authenticator (Magento_TwoFactorAuth)
 
 [Firefox](https://addons.mozilla.org/fr/firefox/addon/auth-helper/)
 
-## Patches
-
-```shell
-find patch/magento/* -name "*.patch" -print
-```
-| Bulletin ID | Source                                      |
-|-------------|---------------------------------------------|
-| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/framework/MDVA-43443.patch    |
-| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/framework/MDVA-43395.patch    |
-| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/module-email/MDVA-43443.patch |
-| [APSB22-12](https://support.magento.com/hc/en-us/articles/4426353041293-Security-updates-available-for-Adobe-Commerce-APSB22-12-)   | patch/magento/module-email/MDVA-43395.patch |
-
 ## Configuration
 
 ### Environment
