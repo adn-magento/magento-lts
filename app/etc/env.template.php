@@ -81,7 +81,7 @@ return [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
-                    'port' => getenv('REDIS_SESSION_PORT'),
+                    'port' => getenv('REDIS_CACHE_PORT'),
                     'database' => '0',
                     'password' => '',
                     'compress_data' => '1',
@@ -99,7 +99,7 @@ return [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
-                    'port' => getenv('REDIS_SESSION_PORT'),
+                    'port' => getenv('REDIS_CACHE_PORT'),
                     'database' => '1',
                     'password' => '',
                     'compress_data' => '0',
