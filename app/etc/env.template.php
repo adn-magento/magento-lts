@@ -77,6 +77,7 @@ return [
     'cache' => [
         'frontend' => [
             'default' => [
+                'id_prefix' => substr(getenv('GIT_COMMIT') ?? '0001', 4) . '_',
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
@@ -94,6 +95,7 @@ return [
                 ]
             ],
             'page_cache' => [
+                'id_prefix' => substr(getenv('GIT_COMMIT') ?? '0001', 4) . '_',
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
