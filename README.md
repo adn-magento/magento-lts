@@ -222,6 +222,18 @@ An opcache preload is implemented to accelerate the reading of static data or da
 
 @see [app/preload.php](/app/preload.php)
 
+FPM Configuration use env variables
+
+Example 
+
+```.dotenv
+FPM_PM="dynamic"
+FPM_PM__MAX_CHILDREN="5"
+FPM_PM__START_SERVERS="2"
+FPM_PM__MIN_SPARE_SERVERS="1"
+FPM_PM__MAX_SPARE_SERVERS="3"
+```
+
 ### Supervisor
 
 ```shell
@@ -280,7 +292,7 @@ Phpunit
 docker-compose exec magento bin-composer exec phpunit
 ```
 
-## Extra Packages
+## Extra Packages recommended
 
 ### Logger
 
@@ -288,12 +300,4 @@ https://github.com/adn-magento/logger
 
 ```shell
 docker-compose exec magento bin-composer require adn-magento/logger
-```
-
-### Etl
-
-https://github.com/adn-magento/etl
-
-```shell
-docker-compose exec magento bin-composer require adn-magento/etl
 ```
