@@ -263,11 +263,13 @@ supervisorctl stop crontab:*
 
 ## Health
 
-@see [docker/docker-health](/docker/docker-health)
+Example
 
 ```shell
 until docker-health >/dev/null 2>&1; do (>&2 echo "Waiting supervisor processes..."); sleep 1; done
 ```
+
+@see [docker/docker-health](/docker/docker-health)
 
 ## Test 
 
