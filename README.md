@@ -84,6 +84,7 @@ Build image
 
 ```shell
 docker build . -t magento-lts:latest \
+--build-arg GIT_COMMIT="$(git rev-parse --verify HEAD)" \
 --build-arg UID="$(id -u)" \
 --build-arg GID="$(id -g)"
 ```
