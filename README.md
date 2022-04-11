@@ -261,6 +261,14 @@ supervisorctl stop crontab:*
 
 @see [supervisor/crontab.conf](/supervisor/crontab.conf) [supervisor/server.conf](/supervisor/server.conf)
 
+## Health
+
+@see [docker/docker-health](/docker/docker-health)
+
+```shell
+until docker-health >/dev/null 2>&1; do (>&2 echo "Waiting supervisor processes..."); sleep 1; done
+```
+
 ## Test 
 
 Phpunit
