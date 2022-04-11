@@ -3,8 +3,8 @@
 set -e
 
 SERVER_PROCESSES="
-server:server-fpm_00
 server:server-nginx_00
+server:server-fpm_00
 "
 
 CRONTAB_PROCESSES="
