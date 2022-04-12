@@ -1,16 +1,6 @@
 #!/bin/bash
 set -e
 
-SERVER_PROCESSES="
-server:server-nginx_00
-server:server-fpm_00
-"
-
-CRONTAB_PROCESSES="
-crontab:crontab-default_00
-crontab:crontab-index_00
-"
-
 COUNTER=1
 
 while [ $COUNTER -le 3 ]
@@ -18,37 +8,19 @@ do
 
   EXIT=0
 
-  if [ "$USE_SERVER" = "true" ]; then
+  PROCESSES=$(supervisorctl pid all)
 
-      for PROCESS in $SERVER_PROCESSES; do
+  for PID in $PROCESSES; do
 
-        PID=$(supervisorctl pid $PROCESS)
+    if [ "$PID" = "0" ]; then
 
-        if [ "$PID" = "0" ]; then
+      EXIT=1
 
-          EXIT=1
+      break
 
-        fi
+    fi
 
-      done
-
-  fi
-
-  if [ "$USE_CRONTAB" = "true" ]; then
-
-      for PROCESS in $CRONTAB_PROCESSES; do
-
-        PID=$(supervisorctl pid $PROCESS)
-
-        if [ "$PID" = "0" ]; then
-
-          EXIT=1
-
-        fi
-
-      done
-
-  fi
+  done
 
   if [ "$EXIT" == "0" ]; then
 

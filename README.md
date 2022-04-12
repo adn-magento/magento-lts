@@ -62,24 +62,6 @@ wget -q https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmai
 mv mhsendmail_linux_amd64 docker/bin-mhsendmail
 ```
 
-Install Phing
-
-https://www.phing.info
-
-```shell
-wget -q https://www.phing.info/get/phing-latest.phar; \
-mv phing-latest.phar docker/bin-phing
-```
-
-Install Mkcert
-
-https://github.com/FiloSottile/mkcert/releases/tag/v1.4.3
-
-```shell
-wget -q https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64; \
-mv mkcert-v1.4.3-linux-amd64 docker/bin-mkcert
-```
-
 Build image
 
 ```shell
@@ -98,16 +80,13 @@ docker-compose up
 Initialize magento
 
 ```shell
-rm -rf generated/* \
-&& rm -rf pub/static/* \
-&& rm -rf var/view_preprocessed/* \
-&& docker-compose exec magento bin/magento app:config:import \
-&& docker-compose exec magento bin/magento setup:upgrade \
-&& docker-compose exec magento bin/magento setup:di:compile \
-&& docker-compose exec magento bin/magento indexer:reindex \
-&& docker-compose exec magento bin/magento cache:clean \
-&& docker-compose exec magento bin/magento cache:flush \
-&& docker-compose exec magento bin/magento setup:static-content:deploy en_US -f
+docker-compose exec magento bin/magento app:config:import; \
+docker-compose exec magento bin/magento setup:upgrade; \
+docker-compose exec magento bin/magento setup:di:compile; \
+docker-compose exec magento bin/magento indexer:reindex; \
+docker-compose exec magento bin/magento cache:clean; \
+docker-compose exec magento bin/magento cache:flush; \
+docker-compose exec magento bin/magento setup:static-content:deploy en_US -f
 ```
 
 Create your admin user
@@ -234,6 +213,8 @@ FPM_PM__MIN_SPARE_SERVERS="1"
 FPM_PM__MAX_SPARE_SERVERS="3"
 ```
 
+@see [server/etc/php/7.4/fpm/pool.d/magento.conf](server/etc/php/7.4/fpm/pool.d/magento.conf) line 103
+
 ### Supervisor
 
 ```shell
@@ -292,7 +273,7 @@ Phpunit
 docker-compose exec magento bin-composer exec phpunit
 ```
 
-## Extra Packages recommended
+## Extra Packages Recommended
 
 ### Logger
 
