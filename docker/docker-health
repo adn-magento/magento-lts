@@ -12,7 +12,7 @@ do
 
   for PID in $PROCESSES; do
 
-    if [ "$PID" = "0" ]; then
+    if [ "$PID" == "0" ]; then
 
       EXIT=1
 
