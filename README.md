@@ -269,6 +269,11 @@ Usage
 
 @see https://rancher.com/docs/rancher/v2.0-v2.4/en/v1.6-migration/monitor-apps/#additional-probing-options
 
+```shell
+# command*
+/usr/bin/docker-health
+```
+
 ## Test 
 
 Phpunit
