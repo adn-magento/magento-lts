@@ -89,16 +89,6 @@ if [ "$1" = 'supervisord' ]; then
 
   fi
 
-  if [ "$MAGE_MODE" == "production" ]; then
-
-      rm -f \
-      "/usr/bin/bin-composer" \
-      "/usr/bin/bin-mhsendmail" \
-      "/usr/bin/bin-mkcert" \
-      "/usr/bin/bin-phing"
-
-  fi
-
 fi
 
 if [ "$1" = 'supervisorctl' ]; then
