@@ -35,6 +35,14 @@ if [ "$1" = 'supervisord' ]; then
 
     fi
 
+    while [ ! -f "/var/www/html/auth.json" ]; do
+
+      (echo >&2 "Waiting for Composer auth.json to be ready...")
+
+      sleep 2
+
+    done
+
     bin-composer install --prefer-dist --no-progress --no-interaction
 
   fi
