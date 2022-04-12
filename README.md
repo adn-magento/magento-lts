@@ -259,11 +259,15 @@ supervisorctl stop crontab:*
 
 Example
 
+@see [docker/docker-health](/docker/docker-health)
+
 ```shell
 until docker-health >/dev/null 2>&1; do (>&2 echo "Waiting supervisor processes..."); sleep 1; done
 ```
 
-@see [docker/docker-health](/docker/docker-health)
+Usage
+
+@see https://rancher.com/docs/rancher/v2.0-v2.4/en/v1.6-migration/monitor-apps/#additional-probing-options
 
 ## Test 
 
