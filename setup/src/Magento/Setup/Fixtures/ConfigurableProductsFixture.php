@@ -6,7 +6,6 @@
 
 namespace Magento\Setup\Fixtures;
 
-use Adn\FileSystem\Model\Config;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;

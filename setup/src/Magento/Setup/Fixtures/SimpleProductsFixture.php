@@ -7,7 +7,6 @@ declare(strict_types=1);
 
 namespace Magento\Setup\Fixtures;
 
-use Adn\FileSystem\Model\Config;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\ProductFactory;

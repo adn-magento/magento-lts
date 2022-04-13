@@ -61,7 +61,7 @@ PHP_OPCACHE__RECORDS_WARNING="0" \
 PHP_OPCACHE__ENABLE_FILE_OVERRIDE="0" \
 PHP_OPCACHE__OPTIMIZATION_LEVEL="0x7FFFBFFF" \
 PHP_OPCACHE__DUPS_FIX="0" \
-PHP_OPCACHE__BLACKLIST_FILENAME="/etc/php/7.4/opcache-*.blacklist" \
+PHP_OPCACHE__BLACKLIST_FILENAME="/etc/php/8.1/opcache-*.blacklist" \
 PHP_OPCACHE__MAX_FILE_SIZE="0" \
 PHP_OPCACHE__CONSISTENCY_CHECKS="0" \
 PHP_OPCACHE__FORCE_RESTART_TIMEOUT="180" \
@@ -82,7 +82,9 @@ PHP_OPCACHE__VALIDATE_ROOT="0" \
 PHP_OPCACHE__OPT_DEBUG_LEVEL="0" \
 PHP_OPCACHE__PRELOAD="/var/www/html/app/preload.php" \
 PHP_OPCACHE__PRELOAD_USER="rootless" \
-PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache"
+PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache" \
+PHP_OPCACHE__JIT="1255" \
+PHP_OPCACHE__JIT_BUFFER_SIZE="250MB"
 
 RUN set -eux; \
 apt-get update \
@@ -117,30 +119,30 @@ apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 supervisor \
 nginx \
-php7.4 \
-php7.4-cli \
-php7.4-fpm \
-php7.4-common \
-php7.4-bcmath \
-php7.4-opcache \
-php7.4-apcu \
-php7.4-amqp \
-php7.4-xdebug \
-php7.4-redis \
-php7.4-curl \
-php7.4-soap \
-php7.4-mbstring \
-php7.4-mysql \
-php7.4-xml \
-php7.4-xsl \
-php7.4-gd \
-php7.4-intl \
-php7.4-iconv \
-php7.4-ftp \
-php7.4-zip
+php8.1 \
+php8.1-cli \
+php8.1-fpm \
+php8.1-common \
+php8.1-bcmath \
+php8.1-opcache \
+php8.1-apcu \
+php8.1-amqp \
+php8.1-xdebug \
+php8.1-redis \
+php8.1-curl \
+php8.1-soap \
+php8.1-mbstring \
+php8.1-mysql \
+php8.1-xml \
+php8.1-xsl \
+php8.1-gd \
+php8.1-intl \
+php8.1-iconv \
+php8.1-ftp \
+php8.1-zip
 
 RUN set -eux; \
-rm -rf /etc/php/7.4/fpm/pool.d/*; \
+rm -rf /etc/php/8.1/fpm/pool.d/*; \
 rm -rf /etc/nginx/sites-available/*; \
 rm -rf /etc/nginx/sites-enabled/*
 
@@ -150,11 +152,11 @@ COPY --chown=rootless:rootless supervisor/ /etc/supervisor/conf.d/
 
 RUN set -eux; \
 ln -sf \
-/etc/php/7.4/90-php.ini \
-/etc/php/7.4/cli/conf.d/90-php.ini; \
+/etc/php/8.1/90-php.ini \
+/etc/php/8.1/cli/conf.d/90-php.ini; \
 ln -sf \
-/etc/php/7.4/90-php.ini \
-/etc/php/7.4/fpm/conf.d/90-php.ini; \
+/etc/php/8.1/90-php.ini \
+/etc/php/8.1/fpm/conf.d/90-php.ini; \
 ln -sf \
 /etc/nginx/sites-available/magento.conf \
 /etc/nginx/sites-enabled/magento.conf

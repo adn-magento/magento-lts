@@ -18,11 +18,11 @@
 atlassian*
 /nbproject
 /robots.txt
-/data/robots.txt
+/pub/robots.txt
 /sitemap
 /sitemap.xml
-/data/sitemap
-/data/sitemap.xml
+/pub/sitemap
+/pub/sitemap.xml
 /.idea
 /.gitattributes
 /auth.json
