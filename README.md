@@ -217,6 +217,7 @@ FPM_PM__MAX_CHILDREN="5"
 FPM_PM__START_SERVERS="2"
 FPM_PM__MIN_SPARE_SERVERS="1"
 FPM_PM__MAX_SPARE_SERVERS="3"
+FPM_PM__MAX_REQUESTS="500"
 ```
 
 @see [server/etc/php/8.1/fpm/pool.d/magento.conf](server/etc/php/8.1/fpm/pool.d/magento.conf) line 103
