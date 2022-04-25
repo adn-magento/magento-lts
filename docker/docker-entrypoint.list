@@ -1,0 +1,7 @@
+docker-entrypoint-timezone
+docker-entrypoint-php
+docker-entrypoint-binary
+docker-entrypoint-composer
+docker-entrypoint-magento
+docker-entrypoint-process
+docker-entrypoint-ready

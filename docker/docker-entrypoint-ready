@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+if [ ! -f /tmp/ready ]; then
+  echo $(date +%s) > /tmp/ready
+fi

@@ -1,128 +1,25 @@
 #!/bin/bash
 set -e
 
+entrypoint=$(printf '%s-entrypoint' "$1")
+
+if [ -f "/usr/bin/$entrypoint" ]; then
+  . $entrypoint "$@"
+fi
+
 if [ "$1" = 'supervisord' ]; then
-
-  if [ ! -s "/etc/php/8.1/90-php.ini" ]; then
-
-    for e in "${!PHP_@}"; do
-
-      VARIABLE=$(echo "$e" | sed -e 's/PHP_/''/g' | sed -e 's/__/'.'/g' | awk '{print tolower($0)}')
-
-      VALUE=$(printf '${%s}' "$e")
-
-      echo "$VARIABLE=$VALUE" >> "/etc/php/8.1/90-php.ini"
-
-    done
-
-  fi
-
-  rm -f "/var/www/html/app/etc/env.php"
-
-  if [ ! -f "/var/www/html/app/etc/env.php" ]; then
-
-    cp \
-    "/var/www/html/app/etc/env.template.php" \
-    "/var/www/html/app/etc/env.php"
-
-  fi
-
-  if [ "$COMPOSER_INSTALL" == "true" ]; then
-
-    if [ "$COMPOSER_AUTH" != "" ] && [ ! -f "/var/www/html/auth.json" ]; then
-
-      echo "$COMPOSER_AUTH" > "/var/www/html/auth.json"
-
+  for entrypoint in $(cat "/usr/bin/docker-entrypoint.list"); do
+    if [ "${entrypoint:0:1}" != "#" ] && [ -f "/usr/bin/$entrypoint" ]; then
+      . $entrypoint "$@"
     fi
-
-    while [ ! -f "/var/www/html/auth.json" ]; do
-
-      (echo >&2 "Waiting for Composer auth.json to be ready...")
-
-      sleep 2
-
-    done
-
-    bin-composer install --prefer-dist --no-progress --no-interaction
-
-  fi
-
-  if [ "$COMPOSER_DUMP" == "true" ]; then
-
-      if [ "$MAGE_MODE" == "production" ]; then
-
-        bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
-
-      else
-
-        bin-composer dump-autoload
-
-      fi
-
-  fi
-
-  while [ ! -f "/var/www/html/vendor/autoload.php" ]; do
-
-    (echo >&2 "Waiting for Composer to be ready...")
-
-    sleep 2
-
   done
-
-  if [ "$MAGE_INSTALL" == "true" ]; then
-
-    bin/magento setup:upgrade
-
-  fi
-
-  if [ "$MAGE_COMPILE" == "true" ]; then
-
-    bin/magento setup:di:compile
-
-  fi
-
-  if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
-
-    bin/magento cache:clean
-
-  fi
-
-  if [ "$USE_SERVER" != "true" ]; then
-
-    rm -f /etc/supervisor/conf.d/server.conf
-
-  fi
-
-  if [ "$USE_CRONTAB" != "true" ]; then
-
-    rm -f /etc/supervisor/conf.d/crontab.conf
-
-  fi
-
 fi
 
 if [ "$1" = 'supervisorctl' ]; then
-
   while [ ! -f "/var/pid/supervisord.pid" ]; do
-
     (echo >&2 "Waiting for Supervisor to be ready...")
-
     sleep 2
-
   done
-
-fi
-
-if [ "$1" = 'nginx' ]; then
-
-  while [ ! -f "/var/pid/php8.1-fpm.pid" ]; do
-
-    (echo >&2 "Waiting for Fpm to be ready...")
-
-    sleep 2
-
-  done
-
 fi
 
 exec "$@"

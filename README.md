@@ -66,7 +66,6 @@ Build image
 
 ```shell
 docker build . -t magento-lts:latest \
---build-arg GIT_COMMIT="$(git rev-parse --verify HEAD)" \
 --build-arg UID="$(id -u)" \
 --build-arg GID="$(id -g)"
 ```
@@ -143,7 +142,7 @@ The entire configuration overlay is in the docker container
 cat /etc/php/8.1/90-php.ini
 ```
 
-@see [docker/docker-entrypoint](/docker/docker-entrypoint) line 7
+@see [docker/docker-entrypoint-php](/docker/docker-entrypoint-php) line 7
 
 example : 
 

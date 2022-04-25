@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+if [ "$MAGE_MODE" != "production" ]; then
+  while [ ! -f "/usr/bin/bin-composer" ]; do
+    (echo >&2 "Waiting for bin-composer to be ready...")
+    sleep 2
+  done
+  while [ ! -f "/usr/bin/bin-mhsendmail" ]; do
+    (echo >&2 "Waiting for bin-mhsendmail to be ready...")
+    sleep 2
+  done
+fi

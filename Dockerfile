@@ -2,12 +2,10 @@ FROM debian:bullseye-slim
 
 ARG UID=1000
 ARG GID=1000
-ARG GIT_COMMIT=""
-ARG COMPOSER_AUTH=""
 
 ENV \
-GIT_COMMIT=${GIT_COMMIT} \
-COMPOSER_AUTH=${COMPOSER_AUTH} \
+GIT_COMMIT="" \
+COMPOSER_AUTH="" \
 COMPOSER_INSTALL="false" \
 COMPOSER_DUMP="false" \
 COMPOSER_ALLOW_SUPERUSER='0' \
@@ -18,6 +16,7 @@ USE_CRONTAB="false" \
 MAGE_INSTALL="false" \
 MAGE_COMPILE="false" \
 MAGE_CLEAN_CACHE="false" \
+MAGE_TIMEZONE="Europe/Paris" \
 MAGE_DEBUG="0" \
 MAGE_MODE="production" \
 MAGE_RUN_CODE="base" \
@@ -82,7 +81,7 @@ PHP_OPCACHE__HUGE_CODE_PAGE="1" \
 PHP_OPCACHE__VALIDATE_PERMISSION="0" \
 PHP_OPCACHE__VALIDATE_ROOT="0" \
 PHP_OPCACHE__OPT_DEBUG_LEVEL="0" \
-PHP_OPCACHE__PRELOAD="/var/www/html/app/preload.php" \
+PHP_OPCACHE__PRELOAD="/var/www/app/preload.php" \
 PHP_OPCACHE__PRELOAD_USER="rootless" \
 PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache" \
 PHP_OPCACHE__JIT="1255" \
@@ -164,6 +163,9 @@ ln -sf \
 /etc/nginx/sites-enabled/magento.conf
 
 RUN set -eux; \
+mkdir -p /tmp; \
+chmod 777 -R /tmp; \
+chown rootless:rootless /tmp; \
 mkdir -p /etc/supervisor; \
 chmod 777 -R /etc/supervisor; \
 chown rootless:rootless /etc/supervisor; \
@@ -200,38 +202,37 @@ mkdir -p /var/lib/nginx; \
 mkdir -p /var/lib/nginx/body; \
 chmod 777 -R /var/lib; \
 chown rootless:rootless /var/lib; \
-mkdir -p /var/www/html; \
-chmod 777 -R /var/www/html; \
-chown rootless:rootless /var/www/html; \
+mkdir -p /var/www; \
+chmod 777 -R /var/www; \
+chown rootless:rootless /var/www; \
 mkdir -p /bin; \
 chmod 777 -R /bin; \
 chown rootless:rootless /bin; \
 touch /dev/stdout; \
 chmod 777 -R /dev/stdout; \
-chown rootless:rootless /dev/stdout
+chown rootless:rootless /dev/stdout; \
+touch /etc/localtime; \
+chmod 777 -R /etc/localtime; \
+chown rootless:rootless /etc/localtime
 
 RUN set -eux; \
 rm -rf /etc/apt/sources.list.d/*; \
-rm -f /var/www/html/*;
+rm -rf /var/www/*;
 
-COPY --chown=rootless:rootless . /var/www/html
+COPY --chown=rootless:rootless . /var/www
 
 RUN set -eux; \
-rm -rf /var/www/html/docker; \
-rm -rf /var/www/html/server; \
-rm -rf /var/www/html/supervisor
+rm -rf /var/www/docker; \
+rm -rf /var/www/server; \
+rm -rf /var/www/supervisor
 
 COPY --chown=rootless:rootless docker/ /usr/bin
 
 RUN set -eux; \
-chmod 777 -R /usr/bin; \
 chmod +x -R /usr/bin; \
-chmod 777 -R /usr/sbin; \
-chmod +x -R /usr/sbin; \
-chmod 777 -R /var/www/html/bin; \
-chmod +x -R /var/www/html/bin
+chmod +x -R /usr/sbin
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 ENTRYPOINT ["docker-entrypoint"]
 

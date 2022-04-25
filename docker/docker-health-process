@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+EXIT=0
+
+PROCESSES=$(supervisorctl pid all)
+
+for PID in $PROCESSES; do
+  if [ "$PID" = "0" ]; then
+    EXIT=1
+    break
+  fi
+done
+
+echo $EXIT

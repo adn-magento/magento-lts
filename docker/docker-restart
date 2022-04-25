@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+steps="
+reread
+reload
+"
+
+for step in $(echo $steps); do
+  supervisorctl "$step" > /dev/null 2>&1
+done
+
+(echo >&2 "Supervisor was successfully restarted")
+
+exit 0

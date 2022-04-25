@@ -105,13 +105,13 @@ services:
   node:
     image: node:lts-bullseye
     command: npm install
-    working_dir: /var/www/html
+    working_dir: /var/www
     labels:
       - traefik.enable=false
     depends_on:
       - traefik
     volumes:
-      - ./:/var/www/html:rw,delegated
+      - ./:/var/www:rw,delegated
 
   magento:
     image: magento-lts:latest
@@ -137,8 +137,8 @@ services:
       - rabbitmq
       - mailhog
     volumes:
-      - ./:/var/www/html:rw,delegated
-      - ./data/media:/var/www/html/pub/media:rw,delegated
+      - ./:/var/www:rw,delegated
+      - ./data/media:/var/www/pub/media:rw,delegated
 
 volumes:
   mysql_data:

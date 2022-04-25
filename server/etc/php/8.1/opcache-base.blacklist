@@ -1,2 +1,2 @@
-/var/www/html/app/etc/*
-/var/www/html/generated/metadata/*
+/var/www/app/etc/*
+/var/www/generated/metadata/*

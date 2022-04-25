@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+if [ "$COMPOSER_INSTALL" == "true" ]; then
+  if [ "$COMPOSER_AUTH" != "" ] && [ ! -f "/var/www/auth.json" ]; then
+    echo "$COMPOSER_AUTH" > "/var/www/auth.json"
+  fi
+  while [ ! -f "/var/www/auth.json" ]; do
+    (echo >&2 "Waiting for Composer auth.json to be ready...")
+    sleep 2
+  done
+  bin-composer install --prefer-dist --no-progress --no-interaction
+fi
+
+if [ "$COMPOSER_DUMP" == "true" ]; then
+    if [ "$MAGE_MODE" == "production" ]; then
+      bin-composer dump-autoload --optimize --no-dev --classmap-authoritative
+    else
+      bin-composer dump-autoload
+    fi
+fi
+
+while [ ! -f "/var/www/vendor/autoload.php" ]; do
+  (echo >&2 "Waiting for Composer to be ready...")
+  sleep 2
+done
