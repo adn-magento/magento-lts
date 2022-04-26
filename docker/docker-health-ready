@@ -3,7 +3,7 @@ set -e
 
 EXIT=0
 
-if [ ! -f /tmp/ready ]; then
+if [ ! -f /tmp/.ready ]; then
   EXIT=1
 fi
 
