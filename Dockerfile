@@ -2,6 +2,7 @@ FROM debian:bullseye-slim
 
 ARG UID=1000
 ARG GID=1000
+ARG APP_RECREATE="true"
 ARG APP_TABLE="app_migration"
 ARG APP_NAME="frontend"
 ARG APP_UID="1"
@@ -13,6 +14,7 @@ ARG APP_TIMEZONE="Europe/Paris"
 ARG COMPOSER_AUTH=""
 
 ENV \
+APP_RECREATE="${APP_RECREATE}" \
 APP_TABLE="${APP_TABLE}" \
 APP_NAME="${APP_NAME}" \
 APP_UID="${APP_UID}" \

@@ -5,8 +5,6 @@ source utils
 
 CREATED_AT=$(date +%s)
 
-IS_READY=1
-
 MYSQL_QUERY \
 "CREATE TABLE IF NOT EXISTS $APP_TABLE (
 id INT NOT NULL AUTO_INCREMENT,
@@ -20,19 +18,32 @@ UNIQUE INDEX id_UNIQUE (id ASC),
 INDEX APP_MIGRATION_SEARCH (app_name ASC, app_secret ASC)
 ) ENGINE = InnoDB;"
 
+if [ "$APP_RECREATE" == "true" ]; then
+
+  MYSQL_QUERY \
+  "DELETE FROM $APP_TABLE
+  WHERE app_name='$APP_NAME'
+  AND app_uid='$APP_UID'
+  AND app_version='$APP_VERSION'
+  AND app_secret='$APP_SECRET'
+  ;"
+
+fi
+
 COUNTER=$(MYSQL_QUERY \
 "SELECT COUNT(*)
 FROM $APP_TABLE
 WHERE app_name='$APP_NAME'
 AND app_uid='$APP_UID'
 AND app_version='$APP_VERSION'
+AND app_secret='$APP_SECRET'
 ;")
 
 while [ "$COUNTER" -gt 0 ]; do
 
-  (>&2 echo "App $APP_NAME v$APP_VERSION with secret $APP_SECRET is all ready running")
+  (>&2 echo "App $APP_NAME / version $APP_VERSION / uid $APP_UID / secret $APP_SECRET is all ready running")
 
-  sleep 10
+  sleep 2
 
   COUNTER=$(MYSQL_QUERY \
   "SELECT COUNT(*)
@@ -40,6 +51,7 @@ while [ "$COUNTER" -gt 0 ]; do
   WHERE app_name='$APP_NAME'
   AND app_uid='$APP_UID'
   AND app_version='$APP_VERSION'
+  AND app_secret='$APP_SECRET'
   ;")
 
 done
