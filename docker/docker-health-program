@@ -4,13 +4,21 @@ set -e
 EXIT=0
 
 if [ "$APP_MODE" == "run" ]; then
+
   PROCESSES=$(supervisorctl pid all)
+
   for PID in $PROCESSES; do
+
     if [ "$PID" = "0" ]; then
+
       EXIT=1
+
       break
+
     fi
+
   done
+
 fi
 
 echo $EXIT

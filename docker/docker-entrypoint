@@ -8,18 +8,24 @@ if [ -f "/usr/bin/$entrypoint" ]; then
 fi
 
 if [ "$1" = 'supervisord' ]; then
+
   for entrypoint in $(cat "/usr/bin/docker-entrypoint.list"); do
+
     if [ "${entrypoint:0:1}" != "#" ] && [ -f "/usr/bin/$entrypoint" ]; then
       . $entrypoint "$@"
     fi
+
   done
+
 fi
 
 if [ "$1" = 'supervisorctl' ]; then
+
   while [ ! -f "/var/pid/supervisord.pid" ]; do
     (echo >&2 "Waiting for Supervisor to be ready...")
     sleep 2
   done
+
 fi
 
 exec "$@"

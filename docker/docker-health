@@ -3,19 +3,30 @@ set -e
 
 COUNTER=1
 
-while [ $COUNTER -le 3 ]
-do
+while [ $COUNTER -le 3 ]; do
+
   EXIT=0
+
   for health in $(cat "/usr/bin/docker-health.list"); do
+
     if [ "${health:0:1}" != "#" ] && [ -f "/usr/bin/$health" ]; then
+
       EXIT=$(exec $health "$@")
+
       if [ "$EXIT" != "0" ]; then
+
         break
+
       fi
+
     fi
+
   done
+
   COUNTER=$((COUNTER+1))
+
   sleep 0.2
+
 done
 
 exit $EXIT
