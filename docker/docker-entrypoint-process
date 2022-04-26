@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 
-if [ "$USE_SERVER" != "true" ]; then
-  rm -f "/etc/supervisor/conf.d/server.conf"
-fi
-
-if [ "$USE_CRONTAB" != "true" ]; then
-  rm -f "/etc/supervisor/conf.d/crontab.conf"
+if [ "$APP_MODE" == "run" ]; then
+    if [ "$USE_SERVER" != "true" ]; then
+      rm -f "/etc/supervisor/conf.d/server.conf"
+    fi
+    if [ "$USE_CRONTAB" != "true" ]; then
+      rm -f "/etc/supervisor/conf.d/crontab.conf"
+    fi
 fi

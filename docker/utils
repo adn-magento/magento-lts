@@ -70,3 +70,7 @@ function REDIS_SESSION_QUERY {
     -p "$REDIS_SESSION_PORT" \
     "$@"
 }
+
+function CURL_STATUS {
+    echo curl --write-out "%{http_code}\n" --silent --output /dev/null "$1"
+}
