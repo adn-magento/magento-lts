@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+source utils
+
+until REDIS_CACHE_QUERY "ping" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for Redis cache to be ready...")
+    sleep 1
+done
+
+until REDIS_SESSION_QUERY "ping" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for Redis cache to be ready...")
+    sleep 1
+done

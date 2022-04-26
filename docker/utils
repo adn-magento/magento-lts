@@ -1,0 +1,72 @@
+#!/bin/bash
+set -e
+
+function OUTPUT {
+    style_start=""
+    style_end=""
+    if [[ "${2:-}" != "" ]]; then
+    case $2 in
+        "success")
+            style_start="\033[0;32m"
+            style_end="\033[0m"
+            ;;
+        "error")
+            style_start="\033[31;31m"
+            style_end="\033[0m"
+            ;;
+        "info"|"warning")
+            style_start="\033[33m"
+            style_end="\033[39m"
+            ;;
+        "heading")
+            style_start="\033[1;33m"
+            style_end="\033[22;39m"
+            ;;
+    esac
+    fi
+    builtin echo -e "${style_start}${1}${style_end}"
+}
+
+function OUTPUT_SUCCESS {
+    OUTPUT "$1" "success"
+}
+
+function OUTPUT_ERROR {
+    OUTPUT "$1" "error"
+}
+
+function OUTPUT_INFO {
+    OUTPUT "$1" "info"
+}
+
+function OUTPUT_WARNING {
+    OUTPUT "$1" "warning"
+}
+
+function OUTPUT_HEADING {
+    OUTPUT "$1" "heading"
+}
+
+function MYSQL_QUERY {
+    mysql \
+    --host="$MYSQL_HOST" \
+    --port="$MYSQL_PORT" \
+    --user="$MYSQL_USER" \
+    --password="$MYSQL_PASSWORD" \
+    --database="$MYSQL_DATABASE" \
+    -se "$@"
+}
+
+function REDIS_CACHE_QUERY {
+    redis-cli \
+    -h "$REDIS_CACHE_HOST" \
+    -p "$REDIS_CACHE_PORT" \
+    "$@"
+}
+
+function REDIS_SESSION_QUERY {
+    redis-cli \
+    -h "$REDIS_SESSION_HOST" \
+    -p "$REDIS_SESSION_PORT" \
+    "$@"
+}

@@ -2,10 +2,12 @@ FROM debian:bullseye-slim
 
 ARG UID=1000
 ARG GID=1000
+ARG GIT_COMMIT=""
+ARG COMPOSER_AUTH=""
 
 ENV \
-GIT_COMMIT="" \
-COMPOSER_AUTH="" \
+GIT_COMMIT="${GIT_COMMIT}" \
+COMPOSER_AUTH="${COMPOSER_AUTH}" \
 COMPOSER_INSTALL="false" \
 COMPOSER_DUMP="false" \
 COMPOSER_ALLOW_SUPERUSER='0' \
@@ -119,6 +121,8 @@ RUN set -eux; \
 apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 supervisor \
+default-mysql-client \
+redis-tools \
 nginx \
 php8.1 \
 php8.1-cli \

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+source utils
+
+until MYSQL_QUERY "SELECT 1" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for MySQL to be ready...")
+    sleep 1
+done
