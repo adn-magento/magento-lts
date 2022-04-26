@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ "$MAGE_TIMEZONE" != "" ] && [ -f "/usr/share/zoneinfo/$MAGE_TIMEZONE" ]; then
-  ln -sf "/usr/share/zoneinfo/$MAGE_TIMEZONE" "/etc/localtime"
+if [ "$APP_TIMEZONE" != "" ] && [ -f "/usr/share/zoneinfo/$APP_TIMEZONE" ]; then
+  ln -sf "/usr/share/zoneinfo/$APP_TIMEZONE" "/etc/localtime"
 fi
