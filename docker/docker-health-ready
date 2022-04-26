@@ -1,10 +1,46 @@
 #!/bin/bash
 set -e
 
+source utils
+
 EXIT=0
 
-if [ ! -f /tmp/.ready ]; then
+COUNTER_APP=$(MYSQL_QUERY \
+"SELECT COUNT(*)
+FROM $APP_TABLE
+WHERE app_name='$APP_NAME'
+AND app_uid='$APP_UID'
+AND app_version='$APP_VERSION'
+AND app_secret='$APP_SECRET'
+;")
+
+if [ "$COUNTER_APP" -gt 1 ]; then
+
   EXIT=1
+
+else
+
+  if [ ! -z "$APP_TRIGGERS" ]; then
+
+    for APP_TRIGGER in $(echo "$APP_TRIGGERS" | tr ',' ' '); do
+
+        COUNTER_TRIGGER=$(MYSQL_QUERY \
+        "SELECT COUNT(*)
+        FROM $APP_TABLE
+        WHERE app_name='$APP_TRIGGER'
+        AND app_secret='$APP_SECRET'
+        AND app_version='$APP_VERSION'
+        ;")
+
+        if [ "$COUNTER_TRIGGER" -lt 1 ]; then
+          EXIT=1
+          break
+        fi
+
+      done
+
+  fi
+
 fi
 
 echo $EXIT

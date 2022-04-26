@@ -1,6 +1,61 @@
 #!/bin/bash
 set -e
 
-if [ ! -f /tmp/.ready ]; then
-  echo $(date +%s) > /tmp/.ready
-fi
+source utils
+
+CREATED_AT=$(date +%s)
+
+IS_READY=1
+
+MYSQL_QUERY \
+"CREATE TABLE IF NOT EXISTS $APP_TABLE (
+id INT NOT NULL AUTO_INCREMENT,
+app_name VARCHAR(64) NOT NULL,
+app_uid VARCHAR(64) NOT NULL,
+app_version VARCHAR(32) NOT NULL,
+app_secret VARCHAR(64) NOT NULL,
+created_at INT NOT NULL DEFAULT 0,
+PRIMARY KEY (id),
+UNIQUE INDEX id_UNIQUE (id ASC),
+INDEX APP_MIGRATION_SEARCH (app_name ASC, app_secret ASC)
+) ENGINE = InnoDB;"
+
+COUNTER=$(MYSQL_QUERY \
+"SELECT COUNT(*)
+FROM $APP_TABLE
+WHERE app_name='$APP_NAME'
+AND app_uid='$APP_UID'
+AND app_version='$APP_VERSION'
+;")
+
+while [ "$COUNTER" -gt 0 ]; do
+
+  (>&2 echo "App $APP_NAME v$APP_VERSION with secret $APP_SECRET is all ready running")
+
+  sleep 10
+
+  COUNTER=$(MYSQL_QUERY \
+  "SELECT COUNT(*)
+  FROM $APP_TABLE
+  WHERE app_name='$APP_NAME'
+  AND app_uid='$APP_UID'
+  AND app_version='$APP_VERSION'
+  ;")
+
+done
+
+MYSQL_QUERY \
+"INSERT INTO $APP_TABLE (
+app_name,
+app_uid,
+app_version,
+app_secret,
+created_at
+)
+VALUES (
+'$APP_NAME',
+'$APP_UID',
+'$APP_VERSION',
+'$APP_SECRET',
+'$CREATED_AT'
+);"
