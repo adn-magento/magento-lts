@@ -4,21 +4,16 @@ set -e
 rm -f "/var/www/app/etc/env.php"
 
 if [ "$APP_MODE" == "run" ]; then
-
     if [ ! -f "/var/www/app/etc/env.php" ]; then
         cp  "/var/www/app/etc/env.template.php"  "/var/www/app/etc/env.php"
     fi
-
     if [ "$MAGE_INSTALL" == "true" ]; then
       bin/magento setup:upgrade
     fi
-
     if [ "$MAGE_COMPILE" == "true" ]; then
       bin/magento setup:di:compile
     fi
-
     if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
       bin/magento cache:clean
     fi
-
 fi
