@@ -5,9 +5,9 @@ EXIT=0
 
 if [ "$APP_MODE" == "run" ]; then
 
-  PROCESSES=$(supervisorctl pid all)
+  PROGRAMS=$(supervisorctl pid all)
 
-  for PID in $PROCESSES; do
+  for PID in $PROGRAMS; do
 
     if [ "$PID" = "0" ]; then
 
