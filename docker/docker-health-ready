@@ -16,7 +16,7 @@ if [ "$APP_MODE" == "run" ]; then
   AND app_secret='$APP_SECRET'
   ;")
 
-  if [ "$COUNTER_APP" -gt 1 ]; then
+  if [ "$COUNTER_APP" -neq 1 ]; then
 
     EXIT=1
 
