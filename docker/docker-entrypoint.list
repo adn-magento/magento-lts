@@ -1,6 +1,7 @@
 docker-entrypoint-timezone
 docker-entrypoint-mysql
 docker-entrypoint-redis
+docker-entrypoint-elasticsearch
 docker-entrypoint-php
 docker-entrypoint-binary
 docker-entrypoint-composer

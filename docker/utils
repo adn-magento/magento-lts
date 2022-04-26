@@ -72,5 +72,5 @@ function REDIS_SESSION_QUERY {
 }
 
 function CURL_STATUS {
-    echo curl --write-out "%{http_code}\n" --silent --output /dev/null "$1"
+    echo $(curl --write-out "%{http_code}\n" --silent --output /dev/null "$1")
 }
