@@ -5,22 +5,24 @@ source utils
 
 EXIT=0
 
-COUNTER_APP=$(MYSQL_QUERY \
-"SELECT COUNT(*)
-FROM $APP_TABLE
-WHERE app_name='$APP_NAME'
-AND app_uid='$APP_UID'
-AND app_version='$APP_VERSION'
-AND app_secret='$APP_SECRET'
-;")
+if [ "$APP_MODE" == "run" ]; then
 
-if [ "$COUNTER_APP" -gt 1 ]; then
+  COUNTER_APP=$(MYSQL_QUERY \
+  "SELECT COUNT(*)
+  FROM $APP_TABLE
+  WHERE app_name='$APP_NAME'
+  AND app_uid='$APP_UID'
+  AND app_version='$APP_VERSION'
+  AND app_secret='$APP_SECRET'
+  ;")
 
-  EXIT=1
+  if [ "$COUNTER_APP" -gt 1 ]; then
 
-else
+    EXIT=1
 
-  if [ ! -z "$APP_TRIGGERS" ]; then
+  else
+
+    if [ ! -z "$APP_TRIGGERS" ]; then
 
     for APP_TRIGGER in $(echo "$APP_TRIGGERS" | tr ',' ' '); do
 
@@ -38,6 +40,8 @@ else
         fi
 
       done
+
+    fi
 
   fi
 

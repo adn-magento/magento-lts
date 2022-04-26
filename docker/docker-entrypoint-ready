@@ -3,47 +3,34 @@ set -e
 
 source utils
 
-CREATED_AT=$(date +%s)
+if [ "$APP_MODE" == "run" ]; then
 
-MYSQL_QUERY \
-"CREATE TABLE IF NOT EXISTS $APP_TABLE (
-id INT NOT NULL AUTO_INCREMENT,
-app_name VARCHAR(64) NOT NULL,
-app_uid VARCHAR(64) NOT NULL,
-app_version VARCHAR(32) NOT NULL,
-app_secret VARCHAR(64) NOT NULL,
-created_at INT NOT NULL DEFAULT 0,
-PRIMARY KEY (id),
-UNIQUE INDEX id_UNIQUE (id ASC),
-INDEX APP_MIGRATION_SEARCH (app_name ASC, app_secret ASC)
-) ENGINE = InnoDB;"
-
-if [ "$APP_RECREATE" == "true" ]; then
+  CREATED_AT=$(date +%s)
 
   MYSQL_QUERY \
-  "DELETE FROM $APP_TABLE
-  WHERE app_name='$APP_NAME'
-  AND app_uid='$APP_UID'
-  AND app_version='$APP_VERSION'
-  AND app_secret='$APP_SECRET'
-  ;"
+  "CREATE TABLE IF NOT EXISTS $APP_TABLE (
+  id INT NOT NULL AUTO_INCREMENT,
+  app_name VARCHAR(64) NOT NULL,
+  app_uid VARCHAR(64) NOT NULL,
+  app_version VARCHAR(32) NOT NULL,
+  app_secret VARCHAR(64) NOT NULL,
+  created_at INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (id),
+  UNIQUE INDEX id_UNIQUE (id ASC),
+  INDEX APP_MIGRATION_SEARCH (app_name ASC, app_secret ASC)
+  ) ENGINE = InnoDB;"
 
-fi
+  if [ "$APP_RECREATE" == "true" ]; then
 
-COUNTER=$(MYSQL_QUERY \
-"SELECT COUNT(*)
-FROM $APP_TABLE
-WHERE app_name='$APP_NAME'
-AND app_uid='$APP_UID'
-AND app_version='$APP_VERSION'
-AND app_secret='$APP_SECRET'
-;")
+    MYSQL_QUERY \
+    "DELETE FROM $APP_TABLE
+    WHERE app_name='$APP_NAME'
+    AND app_uid='$APP_UID'
+    AND app_version='$APP_VERSION'
+    AND app_secret='$APP_SECRET'
+    ;"
 
-while [ "$COUNTER" -gt 0 ]; do
-
-  (>&2 echo "App $APP_NAME / version $APP_VERSION / uid $APP_UID / secret $APP_SECRET is all ready running")
-
-  sleep 2
+  fi
 
   COUNTER=$(MYSQL_QUERY \
   "SELECT COUNT(*)
@@ -54,20 +41,37 @@ while [ "$COUNTER" -gt 0 ]; do
   AND app_secret='$APP_SECRET'
   ;")
 
-done
+  while [ "$COUNTER" -gt 0 ]; do
 
-MYSQL_QUERY \
-"INSERT INTO $APP_TABLE (
-app_name,
-app_uid,
-app_version,
-app_secret,
-created_at
-)
-VALUES (
-'$APP_NAME',
-'$APP_UID',
-'$APP_VERSION',
-'$APP_SECRET',
-'$CREATED_AT'
-);"
+    (>&2 echo "App $APP_NAME / version $APP_VERSION / uid $APP_UID / secret $APP_SECRET is all ready running")
+
+    sleep 2
+
+    COUNTER=$(MYSQL_QUERY \
+    "SELECT COUNT(*)
+    FROM $APP_TABLE
+    WHERE app_name='$APP_NAME'
+    AND app_uid='$APP_UID'
+    AND app_version='$APP_VERSION'
+    AND app_secret='$APP_SECRET'
+    ;")
+
+  done
+
+  MYSQL_QUERY \
+  "INSERT INTO $APP_TABLE (
+  app_name,
+  app_uid,
+  app_version,
+  app_secret,
+  created_at
+  )
+  VALUES (
+  '$APP_NAME',
+  '$APP_UID',
+  '$APP_VERSION',
+  '$APP_SECRET',
+  '$CREATED_AT'
+  );"
+
+fi
