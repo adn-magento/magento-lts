@@ -30,8 +30,8 @@ if [ "$APP_MODE" == "run" ]; then
         "SELECT COUNT(*)
         FROM $APP_TABLE
         WHERE app_name='$APP_TRIGGER'
-        AND app_secret='$APP_SECRET'
         AND app_version='$APP_VERSION'
+        AND app_secret='$APP_SECRET'
         ;")
 
         if [ "$COUNTER_TRIGGER" -lt 1 ]; then
