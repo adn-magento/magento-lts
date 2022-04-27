@@ -142,7 +142,7 @@ The entire configuration overlay is in the docker container
 cat /etc/php/8.1/90-php.ini
 ```
 
-@see [docker/docker-entrypoint-php](/docker/docker-entrypoint-php) line 7
+@see [docker/docker-entrypoint-php](/docker/docker-entrypoint-php)
 
 example : 
 
