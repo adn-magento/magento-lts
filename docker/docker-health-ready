@@ -24,7 +24,7 @@ if [ "$APP_MODE" == "run" ]; then
 
     if [ ! -z "$APP_TRIGGERS" ]; then
 
-    for APP_TRIGGER in $(echo "$APP_TRIGGERS" | tr ',' ' '); do
+      for APP_TRIGGER in $(echo "$APP_TRIGGERS" | tr ',' ' '); do
 
         COUNTER_TRIGGER=$(MYSQL_QUERY \
         "SELECT COUNT(*)
