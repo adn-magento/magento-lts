@@ -37,6 +37,7 @@ if [ "$APP_MODE" == "run" ]; then
   "UPDATE $APP_TABLE
   SET is_active=0
   WHERE app_name='$APP_NAME'
+  AND is_active='1'
   ;"
 
   COUNTER=$(MYSQL_QUERY \
