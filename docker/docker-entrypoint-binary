@@ -1,14 +1,18 @@
 #!/bin/bash
 set -e
 
-if [ "$MAGE_MODE" != "production" ]; then
+binaries="
+bin-composer
+bin-mhsendmail
+"
 
-  binaries="
-  bin-composer
-  bin-mhsendmail
-  "
+for binary in $(echo $binaries); do
 
-  for binary in $(echo $binaries); do
+  if [ "$MAGE_MODE" == "production" ]; then
+
+    rm -rf "/usr/bin/$binary"
+
+  else
 
     while [ ! -f "/usr/bin/$binary" ]; do
 
@@ -22,6 +26,6 @@ if [ "$MAGE_MODE" != "production" ]; then
 
     done
 
-  done
+  fi
 
-fi
+done
