@@ -1,29 +1,61 @@
 #!/bin/bash
 set -e
 
-entrypoint=$(printf '%s-entrypoint' "$1")
-
-if [ -f "/usr/bin/$entrypoint" ]; then
-  . $entrypoint "$@"
-fi
+source utils
 
 if [ "$1" = 'supervisord' ]; then
+
+  OUTPUT_HEADING '       d8888 8888888b.  888b    888                                                 '
+  OUTPUT_HEADING '      d88888 888  "Y88b 8888b   888                                                 '
+  OUTPUT_HEADING '     d88P888 888    888 88888b  888                                                 '
+  OUTPUT_HEADING '    d88P 888 888    888 888Y88b 888                                                 '
+  OUTPUT_HEADING '   d88P  888 888    888 888 Y88b888                                                 '
+  OUTPUT_HEADING '  d88P   888 888    888 888  Y88888                                                 '
+  OUTPUT_HEADING ' d8888888888 888  .d88P 888   Y8888                                                 '
+  OUTPUT_HEADING 'd88P     888 8888888P"  888    Y888                                                 '
+  OUTPUT_HEADING '                                                                                    '
+  OUTPUT_HEADING '888b     d888        d8888  .d8888b.  8888888888 888b    888 88888888888 .d88888b.  '
+  OUTPUT_HEADING '8888b   d8888       d88888 d88P  Y88b 888        8888b   888     888    d88P" "Y88b '
+  OUTPUT_HEADING '88888b.d88888      d88P888 888    888 888        88888b  888     888    888     888 '
+  OUTPUT_HEADING '888Y88888P888     d88P 888 888        8888888    888Y88b 888     888    888     888 '
+  OUTPUT_HEADING '888 Y888P 888    d88P  888 888  88888 888        888 Y88b888     888    888     888 '
+  OUTPUT_HEADING '888  Y8P  888   d88P   888 888    888 888        888  Y88888     888    888     888 '
+  OUTPUT_HEADING '888   "   888  d8888888888 Y88b  d88P 888        888   Y8888     888    Y88b. .d88P '
+  OUTPUT_HEADING '888       888 d88P     888  "Y8888P88 8888888888 888    Y888     888     "Y88888P"  '
+  OUTPUT_HEADING ''
 
   for entrypoint in $(cat "/usr/bin/docker-entrypoint.list"); do
 
     if [ "${entrypoint:0:1}" != "#" ] && [ -f "/usr/bin/$entrypoint" ]; then
+
+      OUTPUT_SUCCESS "Execute $entrypoint"
+
       . $entrypoint "$@"
+
     fi
 
   done
 
 fi
 
+entrypoint=$(printf '%s-entrypoint' "$1")
+
+if [ -f "/usr/bin/$entrypoint" ]; then
+
+  OUTPUT_SUCCESS "Execute $entrypoint"
+
+  . $entrypoint "$@"
+
+fi
+
 if [ "$1" = 'supervisorctl' ]; then
 
   while [ ! -f "/var/pid/supervisord.pid" ]; do
+
     (echo >&2 "Waiting for Supervisor to be ready...")
+
     sleep 2
+
   done
 
 fi
