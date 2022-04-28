@@ -5,19 +5,28 @@ EXIT=0
 
 if [ "$APP_MODE" == "run" ]; then
 
-  PROGRAMS=$(supervisorctl pid all)
+  if [ ! -f "/var/pid/supervisord.pid" ]; then
 
-  for PID in $PROGRAMS; do
+    EXIT=1
 
-    if [ "$PID" = "0" ]; then
+  else
 
-      EXIT=1
+    PROGRAMS=$(supervisorctl pid all)
 
-      break
+    for PID in $PROGRAMS; do
 
-    fi
+      if [ "$PID" = "0" ]; then
 
-  done
+        EXIT=1
+
+        break
+
+      fi
+
+    done
+
+  fi
+
 
 fi
 
