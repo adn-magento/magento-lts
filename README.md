@@ -38,7 +38,6 @@ Copy rules
 127.0.0.1       www.magento.lan
 ```
 
-
 Update composer auth.json
 
 ```shell
@@ -75,6 +74,12 @@ Start containers
 
 ```shell
 docker-compose up
+```
+
+Use varnish
+
+```shell
+docker-compose exec magento bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/caching_application 2
 ```
 
 Initialize magento
@@ -119,7 +124,7 @@ Install Authenticator (Magento_TwoFactorAuth)
 
 Configure your environment via [.env](/.env) files for local
 
-Magento best practices 
+Magento best practices
 
 @see https://devdocs.magento.com/guides/v2.4/config-guide/prod/config-reference-var-name.html
 
@@ -145,7 +150,7 @@ cat /etc/php/8.1/90-php.ini
 
 @see [docker/docker-entrypoint-php](/docker/docker-entrypoint-php)
 
-example : 
+example :
 
 ```shell
 docker-compose exec magento env | grep "PHP_"
@@ -209,7 +214,7 @@ Opcache JIT is active, depending on your needs configure it appropriately.
 
 FPM Configuration use env variables
 
-Example 
+Example
 
 ```.dotenv
 FPM_PM="dynamic"
@@ -281,7 +286,7 @@ Usage
 /usr/bin/docker-health
 ```
 
-## Test 
+## Test
 
 Phpunit
 
