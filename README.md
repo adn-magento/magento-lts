@@ -34,6 +34,7 @@ Copy rules
 127.0.0.1       www.rabbitmq.lan
 127.0.0.1       www.elasticsearch.lan
 127.0.0.1       www.mailhog.lan
+127.0.0.1       www.magento-live.lan
 127.0.0.1       www.magento.lan
 ```
 
