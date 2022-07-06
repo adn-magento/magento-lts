@@ -6,5 +6,4 @@ docker-entrypoint-php
 docker-entrypoint-binary
 docker-entrypoint-composer
 docker-entrypoint-magento
-docker-entrypoint-program
-docker-entrypoint-ready
+docker-entrypoint-supervisor
