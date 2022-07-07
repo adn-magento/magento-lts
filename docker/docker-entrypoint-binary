@@ -8,7 +8,7 @@ bin-mhsendmail
 
 for binary in $(echo $binaries); do
 
-  if [ "$MAGE_MODE" == "production" ]; then
+  if [ "$APP_MODE" != "build" ]; then
 
     rm -rf "/usr/bin/$binary"
 
