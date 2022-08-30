@@ -2,23 +2,22 @@ FROM debian:bullseye-slim
 
 ARG UID=1000
 ARG GID=1000
-ARG APP_MODE="build"
 ARG APP_SECRET="a00001"
 ARG APP_TIMEZONE="Europe/Paris"
 ARG COMPOSER_AUTH=""
 
 ENV \
-APP_MODE="${APP_MODE}" \
 APP_SECRET="${APP_SECRET}" \
 APP_TIMEZONE="${APP_TIMEZONE}" \
+SUPERVISOR_PASSWORD="rootless" \
+SUPERVISOR_LOG_LEVEL="warn" \
 COMPOSER_AUTH="${COMPOSER_AUTH}" \
 COMPOSER_INSTALL="false" \
 COMPOSER_DUMP="false" \
 COMPOSER_ALLOW_SUPERUSER='0' \
 COMPOSER_ALLOW_XDEBUG='0' \
 COMPOSER_CACHE_DIR='/var/cache/composer' \
-USE_SERVER="false" \
-USE_CRONTAB="false" \
+MAGE_HEATH="http://127.0.0.1/health_docker.php" \
 MAGE_INSTALL="false" \
 MAGE_COMPILE="false" \
 MAGE_CLEAN_CACHE="false" \
@@ -33,11 +32,22 @@ MYSQL_PORT="3306" \
 MYSQL_DATABASE="magento" \
 MYSQL_USER="rootless" \
 MYSQL_PASSWORD="nopassword" \
+ELASTICSEARCH_HOST="elasticsearch" \
+ELASTICSEARCH_PORT="9200" \
+ELASTICSEARCH_PREFIX="magento" \
+ELASTICSEARCH_ENABLE_AUTH="0" \
+ELASTICSEARCH_USERNAME="rootless" \
+ELASTICSEARCH_PASSWORD="nopassword" \
+ELASTICSEARCH_URL="http://www.elasticsearch.lan" \
+ELASTICSEARCH_HEATH="http://www.elasticsearch.lan" \
 RABBITMQ_HOST="rabbitmq" \
 RABBITMQ_PORT="5672" \
 RABBITMQ_USER="rootless" \
 RABBITMQ_PASSWORD="nopassword" \
-FPM_PM="dynamic" \
+NGINX_WORKER_PROCESSES="5" \
+NGINX_ACCESS_LOG="off" \
+NGINX_ERROR_LOG="/dev/stdout" \
+FPM_PM="static" \
 FPM_PM__MAX_CHILDREN="5" \
 FPM_PM__START_SERVERS="2" \
 FPM_PM__MIN_SPARE_SERVERS="1" \
@@ -90,7 +100,7 @@ PHP_OPCACHE__PRELOAD="/var/www/app/preload.php" \
 PHP_OPCACHE__PRELOAD_USER="rootless" \
 PHP_OPCACHE__LOCKFILE_PATH="/var/lock/opcache" \
 PHP_OPCACHE__JIT="1255" \
-PHP_OPCACHE__JIT_BUFFER_SIZE="250MB"
+PHP_OPCACHE__JIT_BUFFER_SIZE="400MB"
 
 RUN set -eux; \
 apt-get update \
@@ -104,6 +114,7 @@ gnupg1 \
 gnupg2 \
 wget \
 git \
+jq \
 patch \
 curl \
 unzip

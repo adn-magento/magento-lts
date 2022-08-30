@@ -3,14 +3,10 @@ set -e
 
 source utils
 
-if [ "$APP_MODE" == "run" ]; then
-
-  while [ $(CURL_STATUS "http://$ELASTICSEARCH_HOST:$ELASTICSEARCH_PORT/_cluster/health") != "200" ]; do
+while [ $(CURL_STATUS "$ELASTICSEARCH_HEATH") != "200" ]; do
 
     (echo >&2 "Waiting for Elasticsearch to be ready...")
 
-    sleep 2
+sleep 2
 
-  done
-
-fi
+done

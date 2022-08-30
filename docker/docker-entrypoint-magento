@@ -1,32 +1,28 @@
 #!/bin/bash
 set -e
 
-rm -f "/var/www/app/etc/env.php"
+if [ ! -f "/var/www/app/etc/env.php" ]; then
 
-if [ "$APP_MODE" == "run" ]; then
+    cp \
+    "/var/www/app/etc/env.template.php" \
+    "/var/www/app/etc/env.php"
 
-    if [ ! -f "/var/www/app/etc/env.php" ]; then
+fi
 
-        cp  "/var/www/app/etc/env.template.php"  "/var/www/app/etc/env.php"
+if [ "$MAGE_INSTALL" == "true" ]; then
 
-    fi
+    bin/magento setup:upgrade
 
-    if [ "$MAGE_INSTALL" == "true" ]; then
+fi
 
-      bin/magento setup:upgrade
+if [ "$MAGE_COMPILE" == "true" ]; then
 
-    fi
+    bin/magento setup:di:compile
 
-    if [ "$MAGE_COMPILE" == "true" ]; then
+fi
 
-      bin/magento setup:di:compile
+if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
 
-    fi
-
-    if [ "$MAGE_CACHE_CLEAN" == "true" ]; then
-
-      bin/magento cache:clean
-
-    fi
+    bin/magento cache:clean
 
 fi

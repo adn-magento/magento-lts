@@ -3,14 +3,10 @@ set -e
 
 source utils
 
-if [ "$APP_MODE" == "run" ]; then
+until MYSQL_QUERY "SELECT 1" >/dev/null 2>&1; do
 
-    until MYSQL_QUERY "SELECT 1" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for MySQL to be ready...")
 
-        (>&2 echo "Waiting for MySQL to be ready...")
+    sleep 2
 
-        sleep 2
-
-    done
-
-fi
+done

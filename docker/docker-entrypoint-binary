@@ -1,24 +1,24 @@
 #!/bin/bash
 set -e
 
-binaries="
+DEV_TOOLS="
 bin-composer
 bin-mhsendmail
 "
 
-for binary in $(echo $binaries); do
+for DEV_TOOL in $(echo $DEV_TOOLS); do
 
-  if [ "$APP_MODE" != "build" ]; then
+  if [ "$MAGE_MODE" == "production" ]; then
 
     rm -rf "/usr/bin/$binary"
 
   else
 
-    while [ ! -f "/usr/bin/$binary" ]; do
+    while [ ! -f "/usr/bin/$DEV_TOOL" ]; do
 
-      if [ "${binary:0:1}" != "#" ]; then
+      if [ "${$DEV_TOOL:0:1}" != "#" ]; then
 
-        (echo >&2 "Waiting for $binary to be ready...")
+        (echo >&2 "Waiting for $DEV_TOOL to be ready...")
 
         sleep 2
 

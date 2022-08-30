@@ -5,27 +5,31 @@ COUNTER=1
 
 while [ $COUNTER -le 3 ]; do
 
-  EXIT=0
+    EXIT="0"
 
-  for health in $(cat "/usr/bin/docker-health.list"); do
+    for HEALTH in $(cat "/usr/bin/docker-health.list"); do
 
-    if [ "${health:0:1}" != "#" ] && [ -f "/usr/bin/$health" ]; then
+        if [ "${HEALTH:0:1}" != "#" ] && [ -f "/usr/bin/$HEALTH" ]; then
 
-      EXIT=$(exec $health "$@")
+            EXIT=$(exec $HEALTH "$@")
 
-      if [ "$EXIT" != "0" ]; then
+            if [ "$EXIT" != "0" ]; then
 
-        break
+                break
 
-      fi
+            fi
+
+        fi
+
+    done
+
+    COUNTER=$((COUNTER+1))
+
+    if [ "$EXIT" != "0" ]; then
+
+        sleep 0.2
 
     fi
-
-  done
-
-  COUNTER=$((COUNTER+1))
-
-  sleep 0.2
 
 done
 

@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+source utils
+
+EXIT=0
+
+for HEALTH_DEPENDENCY in $(cat "/usr/bin/docker-health-dependency.list"); do
+
+    if [ "${HEALTH_DEPENDENCY:0:1}" != "#" ]; then
+
+        RESULT=$(CURL_STATUS "$HEALTH_DEPENDENCY?secret=$APP_SECRET")
+
+        if [ "$RESULT" != "200" ]; then
+
+            EXIT=1
+
+            break
+
+        fi
+
+    fi
+
+done
+
+echo $EXIT

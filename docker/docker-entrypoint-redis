@@ -3,22 +3,18 @@ set -e
 
 source utils
 
-if [ "$APP_MODE" == "run" ]; then
+until REDIS_CACHE_QUERY "ping" >/dev/null 2>&1; do
 
-    until REDIS_CACHE_QUERY "ping" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for Redis cache to be ready...")
 
-        (>&2 echo "Waiting for Redis cache to be ready...")
+    sleep 2
 
-        sleep 2
+done
 
-    done
+until REDIS_SESSION_QUERY "ping" >/dev/null 2>&1; do
 
-    until REDIS_SESSION_QUERY "ping" >/dev/null 2>&1; do
+    (>&2 echo "Waiting for Redis session to be ready...")
 
-        (>&2 echo "Waiting for Redis session to be ready...")
+    sleep 2
 
-        sleep 2
-
-    done
-
-fi
+done

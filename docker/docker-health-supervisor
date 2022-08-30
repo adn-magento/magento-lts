@@ -3,30 +3,25 @@ set -e
 
 EXIT=0
 
-if [ "$APP_MODE" == "run" ]; then
-
-  if [ ! -f "/var/pid/supervisord.pid" ]; then
+if [ ! -f "/var/pid/supervisord.pid" ]; then
 
     EXIT=1
 
-  else
+else
 
     PROGRAMS=$(supervisorctl pid all)
 
     for PID in $PROGRAMS; do
 
-      if [ "$PID" = "0" ]; then
+        if [ "$PID" = "0" ]; then
 
-        EXIT=1
+            EXIT=1
 
-        break
+            break
 
-      fi
+        fi
 
     done
-
-  fi
-
 
 fi
 

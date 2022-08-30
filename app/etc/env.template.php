@@ -52,10 +52,10 @@ return [
         'redis' => [
             'host' => getenv('REDIS_SESSION_HOST'),
             'port' => getenv('REDIS_SESSION_PORT'),
+            'database' => getenv('REDIS_SESSION_DATABASE') ?? '2',
             'password' => '',
             'timeout' => '2.5',
             'persistent_identifier' => '',
-            'database' => '2',
             'compression_threshold' => '2048',
             'compression_library' => 'gzip',
             'log_level' => '4',
@@ -82,7 +82,7 @@ return [
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
                     'port' => getenv('REDIS_CACHE_PORT'),
-                    'database' => '0',
+                    'database' => getenv('REDIS_CACHE_DEFAULT_DATABASE') ?? '0',
                     'password' => '',
                     'compress_data' => '1',
                     'compression_lib' => '',
@@ -100,7 +100,7 @@ return [
                 'backend_options' => [
                     'server' => getenv('REDIS_CACHE_HOST'),
                     'port' => getenv('REDIS_CACHE_PORT'),
-                    'database' => '1',
+                    'database' => getenv('REDIS_CACHE_PAGE_CACHE_DATABASE') ?? '1',
                     'password' => '',
                     'compress_data' => '0',
                     'compression_lib' => ''

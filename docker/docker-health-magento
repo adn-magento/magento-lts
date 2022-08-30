@@ -5,15 +5,15 @@ source utils
 
 EXIT=0
 
-if [ "$APP_MODE" == "run" ] && [ "$USE_SERVER" == "true" ]; then
+if [ -f "/etc/supervisor/conf.d/server.conf" ]; then
 
-  MAGENTO_HEATH=$(CURL_STATUS "http://127.0.0.1/health_check.php")
+    RESULT=$(CURL_STATUS "$MAGE_HEATH?secret=$APP_SECRET")
 
-  if [ "$MAGENTO_HEATH" != "200" ]; then
+    if [ "$RESULT" != "200" ]; then
 
-    EXIT=1
+        EXIT=1
 
-  fi
+    fi
 
 fi
 

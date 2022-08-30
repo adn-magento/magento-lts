@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+sed -i \
+"s/worker_processes 5;/worker_processes $NGINX_WORKER_PROCESSES;/" \
+"/etc/nginx/nginx.conf"
+
+sed -i \
+"s/access_log off;/access_log $NGINX_ACCESS_LOG;/" \
+"/etc/nginx/nginx.conf"
+
+sed -i \
+"s/error_log off;/error_log $NGINX_ERROR_LOG;/" \
+"/etc/nginx/nginx.conf"

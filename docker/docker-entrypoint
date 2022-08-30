@@ -5,13 +5,11 @@ source utils
 
 if [ "$1" = 'supervisord' ]; then
 
-  for entrypoint in $(cat "/usr/bin/docker-entrypoint.list"); do
+  for ENTRYPOINT in $(cat "/usr/bin/docker-entrypoint.list"); do
 
-    if [ "${entrypoint:0:1}" != "#" ] && [ -f "/usr/bin/$entrypoint" ]; then
+    if [ "${ENTRYPOINT:0:1}" != "#" ] && [ -f "/usr/bin/$ENTRYPOINT" ]; then
 
-      OUTPUT_SUCCESS "Execute $entrypoint"
-
-      . $entrypoint "$@"
+      . $ENTRYPOINT "$@"
 
     fi
 
